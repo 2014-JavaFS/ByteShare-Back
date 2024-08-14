@@ -56,7 +56,7 @@ public class RecipeService implements Serviceable<Recipe> {
     }
 
     public List<Recipe> findAllById(int userId) {
-        List<Recipe> recipes = recipeRepository.findAllByUserId(userId);
+        List<Recipe> recipes = recipeRepository.findAllByUserUserId(userId);
         if (recipes.isEmpty()){
             throw new DataNotFoundException("No recipes with that userId was found");
         } else {

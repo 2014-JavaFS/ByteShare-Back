@@ -14,7 +14,6 @@ public class RecipeController {
     private final RecipeService recipeService;
 
     @Autowired
-
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
@@ -24,8 +23,18 @@ public class RecipeController {
         return recipeService.findAll();
     }
 
-    @PostMapping
-    public ResponseEntity<Recipe> postRecipe(@Valid @RequestBody Recipe newRecipe){
-        return ResponseEntity.ok(recipeService.update(newRecipe));
+    @GetMapping("/{id}")
+    public ResponseEntity<Recipe> getRecipeById(@PathVariable int id){
+        return ResponseEntity.ok(recipeService.findById(id));
+    }
+
+    @PutMapping
+    public ResponseEntity<Boolean> putUpdateRecipe(@Valid @RequestBody Recipe updatedRecipe) {
+        return ResponseEntity.ok(recipeService.update(updatedRecipe));
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<List<Recipe>> getAllOrdersByUserId(@PathVariable int userId){
+        return ResponseEntity.ok(recipeService.findAllById(userId));
     }
 }
