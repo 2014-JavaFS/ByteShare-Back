@@ -27,6 +27,15 @@ public class Recipe {
     @Column(name = "date_posted", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp datePosted;
 
-    //TODO: Spring annotations for content in Recipe.java
+    //TODO: Spring annotations for content in Recipe.java; double check this later
+    @Column(name = "content", columnDefinition = "BLOB")
     private String content;
+
+    //TODO: double check these annotations
+    @Column(name = "prep_time", columnDefinition = "INTEGER")
+    private int prepTime;
+
+    //TODO: double check these annotations
+    @Column(name = "cook_time", columnDefinition = "INTEGER")
+    private int cookTime;
 }
