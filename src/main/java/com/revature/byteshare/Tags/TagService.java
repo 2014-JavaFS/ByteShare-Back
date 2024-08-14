@@ -14,12 +14,16 @@ public class TagService {
     public TagService(TagRepository tagsRepository){
             this.tagsRepository = tagsRepository;
     }
-    public List<Tag> findAllTags(){
-        return tagsRepository.findAll();
+    // TODO: need to update the exception thrown once aspects are made
+    public List<String> findAllTagNamesByRecipeID(int id ){
+        return tagsRepository.findAllTagNamesByRecipeID(id).orElseThrow();
     }
     // TODO: need to update the exception thrown once aspects are made
-    public List<Tag> findAllByRecipeID(int id ){
-        return tagsRepository.findAllByRecipeID(id).orElseThrow();
+    public List<Integer> findAllRecipeByTagName(String tag_name){
+        return tagsRepository.findAllRecipesByTags(tag_name).orElseThrow();
+    }
+    public List<Tag> findAllTags(){
+        return tagsRepository.findAll();
     }
     public Tag create(Tag tagToMake){
         return tagsRepository.save(tagToMake);
