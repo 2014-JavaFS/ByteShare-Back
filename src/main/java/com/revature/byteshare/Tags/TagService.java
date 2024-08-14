@@ -15,8 +15,8 @@ public class TagService {
             this.tagsRepository = tagsRepository;
     }
     // TODO: need to update the exception thrown once aspects are made
-    public List<Tag> findAllByRecipeID(int id ){
-        return tagsRepository.findAllByRecipeID(id).orElseThrow();
+    public List<String> findAllTagNamesByRecipeID(int id ){
+        return tagsRepository.findAllTagNamesByRecipeID(id).orElseThrow();
     }
     // TODO: need to update the exception thrown once aspects are made
     public List<Integer> findAllRecipeByTagName(String tag_name){

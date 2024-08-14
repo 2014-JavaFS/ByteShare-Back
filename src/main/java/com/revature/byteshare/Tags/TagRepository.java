@@ -11,8 +11,8 @@ import java.util.Optional;
 @Repository
 public interface TagRepository extends JpaRepository<Tag, Integer> {
     //TODO may need to be changes based on the 'recipe_id' name, test this
-    // wanted to do this by using an inline query instead of an annotation query but well see
-    Optional<List<Tag>> findAllByRecipeID(int id);
+    @Query("select t.tag_name from tags t where t.recipe_id = :recipe_id")
+    Optional<List<String>> findAllTagNamesByRecipeID(@Param("recipe_id") int recipe_id);
 
     //TODO need to test this, make sure query is spelled properly when all tables are made
     @Query("select t.recipe_Id from tags t where t.tag_name = :tag_name")
