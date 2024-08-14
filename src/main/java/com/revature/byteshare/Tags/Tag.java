@@ -16,8 +16,8 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int tag_id;
 
-    @OneToMany
-    @JoinColumn(name = "recipe_id")
+    @ManyToMany
+    @JoinColumn(name = "recipe_Id") //TODO make sure this is the correct column string
     private int recipe_id;
 
     @Column(unique = true, nullable = false, columnDefinition = "varchar(12)")// 12 is entirely arbitrary lmk if it should change
