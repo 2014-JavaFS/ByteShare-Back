@@ -1,4 +1,4 @@
-package com.revature.byteshare.recipe;
+package com.revature.byteshare.Recipe;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
