@@ -23,7 +23,7 @@ public class UserService {
     }
 
     public int lookupUserIdByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow().getUser_id();
+        return userRepository.findByEmail(email).orElseThrow().getUserId();
     }
 
     public User findById(int userId){

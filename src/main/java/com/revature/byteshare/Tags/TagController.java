@@ -30,16 +30,16 @@ public class TagController {
 
     // TODO : FOR REVIEWER: do we actually just want this to return a list
     //  of Tag_names or do we want it returning the whole tag object?
-    /**
+    /*
      * This method is used when displaying a recipe. It will return all Tag
      * Names associated with this recipe id.
      * @param recipeId
      * @return A list of Tag Names (Strings)
      */
-    @GetMapping("/{recipeId}")
-    public List<String> getAllTagsByRecipeId(@PathVariable int recipeId){
-        return tagService.findAllTagNamesByRecipeID(recipeId);
-    }
+//    @GetMapping("/{recipeId}")
+//    public List<String> getAllTagsByRecipeId(@PathVariable int recipeId){
+//        return tagService.findAllTagNamesByRecipeID(recipeId);
+//    }
     @GetMapping
     public List<Tag> getAllTags(){
         return tagService.findAllTags();

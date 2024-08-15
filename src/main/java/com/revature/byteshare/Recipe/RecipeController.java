@@ -1,4 +1,4 @@
-package com.revature.byteshare.Recipe;
+package com.revature.byteshare.recipe;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

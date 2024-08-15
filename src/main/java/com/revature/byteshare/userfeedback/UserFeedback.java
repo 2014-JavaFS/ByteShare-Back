@@ -1,6 +1,7 @@
 package com.revature.byteshare.userfeedback;
 
 import com.revature.byteshare.User.User;
+import com.revature.byteshare.recipe.Recipe;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +22,7 @@ public class UserFeedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ratingId;
 
-    @ManyToOne(targetEntity=Recipe.class, cascade = CascadeType.REMOVE, optional = false)
+    @ManyToOne(targetEntity= Recipe.class, cascade = CascadeType.REMOVE, optional = false)
     @JoinColumn(name="recipe_id")
     private int recipeId;
 

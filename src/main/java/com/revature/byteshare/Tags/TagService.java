@@ -15,13 +15,13 @@ public class TagService {
             this.tagsRepository = tagsRepository;
     }
     // TODO: need to update the exception thrown once aspects are made
-    public List<String> findAllTagNamesByRecipeID(int id ){
-        return tagsRepository.findAllTagNamesByRecipeID(id).orElseThrow();
-    }
+//    public List<String> findAllTagNamesByRecipeID(int id ){
+//        return tagsRepository.findAllTagNamesByRecipeID(id).orElseThrow();
+//    }
     // TODO: need to update the exception thrown once aspects are made
-    public List<Integer> findAllRecipeByTagName(String tag_name){
-        return tagsRepository.findAllRecipesByTags(tag_name).orElseThrow();
-    }
+//    public List<Integer> findAllRecipeByTagName(String tag_name){
+//        return tagsRepository.findAllRecipesByTags(tag_name).orElseThrow();
+//    }
     public List<Tag> findAllTags(){
         return tagsRepository.findAll();
     }

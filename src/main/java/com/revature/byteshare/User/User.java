@@ -1,6 +1,7 @@
 package com.revature.byteshare.User;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,12 +17,13 @@ import lombok.NoArgsConstructor;
 
 // Jakarta Persistence Annotations
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int user_id;
+    private int userId;
     @Column(unique = true, nullable = false)
+    @Email(message = "An email address must be in the form of _@_._; please try again.")
     private String email;
     @Column(nullable = false)
     private String password;
