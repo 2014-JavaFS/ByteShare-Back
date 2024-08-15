@@ -36,8 +36,8 @@ public class RecipeService {
 
     @Transactional
     public boolean update(Recipe recipeToUpdate) {
-        Recipe foundRecipe = recipeRepository.findById(recipeToUpdate.getRecipeId())
-                .orElseThrow(() -> new DataNotFoundException("No recipe with the ID of " + recipeToUpdate.getRecipeId()));
+        Recipe foundRecipe = recipeRepository.findById(recipeToUpdate.getId())
+                .orElseThrow(() -> new DataNotFoundException("No recipe with the ID of " + recipeToUpdate.getId()));
         if (foundRecipe == null) {
             throw new DataNotFoundException("Order with that ID is not in the database, please check again");
         }
