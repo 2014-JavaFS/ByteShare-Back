@@ -1,4 +1,4 @@
-package com.revature.byteshare.User;
+package com.revature.byteshare.user;
 
 public class UserController {
 }

@@ -1,4 +1,4 @@
-package com.revature.byteshare.User;
+package com.revature.byteshare.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

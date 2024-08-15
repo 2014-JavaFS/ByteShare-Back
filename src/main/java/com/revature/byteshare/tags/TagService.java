@@ -1,4 +1,4 @@
-package com.revature.byteshare.Tags;
+package com.revature.byteshare.tags;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
