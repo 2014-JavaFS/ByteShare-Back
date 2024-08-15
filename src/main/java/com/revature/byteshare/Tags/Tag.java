@@ -16,7 +16,7 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int tag_id;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "recipe_Id") //TODO make sure this is the correct column string
     private int recipe_id;
 
