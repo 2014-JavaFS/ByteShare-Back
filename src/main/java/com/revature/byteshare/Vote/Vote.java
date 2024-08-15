@@ -19,7 +19,7 @@ public class Vote {
     @GeneratedValue
     private int vote_id;
     private User voter;
-    private Post post;
+    private Post post;      // Post or Recipe?
     private boolean isUpvote;
 }
 

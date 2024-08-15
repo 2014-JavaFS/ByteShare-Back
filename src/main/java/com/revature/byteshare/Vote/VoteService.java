@@ -46,8 +46,8 @@ public class VoteService {
     }
 
     @Transactional
-    public boolean delete(Vote vote) {
-        voteRepository.delete(vote);
+    public boolean delete(int voteId) {
+        voteRepository.deleteById(voteId);
         return true;
     }
 

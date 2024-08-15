@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -27,6 +28,21 @@ public class VoteController {
     @PostMapping
     public ResponseEntity<Vote> postNewVote(@RequestBody Vote vote) {
         return ResponseEntity.status(HttpStatus.CREATED).body(voteService.create(vote));
+    }
+
+    @GetMapping("/{id}")
+    private ResponseEntity<Vote> getVoteById(@PathVariable int id) {
+        return ResponseEntity.ok(voteService.findById(id));
+    }
+
+    @PutMapping
+    private ResponseEntity<Boolean> putUpdateVote(@RequestBody Vote updatedVote) {
+        return ResponseEntity.ok(voteService.update(updatedVote));
+    }
+
+    @DeleteMapping
+    private ResponseEntity<Boolean> deleteVote(@PathVariable int id) {
+        return ResponseEntity.ok(voteService.delete(id));
     }
 
 
