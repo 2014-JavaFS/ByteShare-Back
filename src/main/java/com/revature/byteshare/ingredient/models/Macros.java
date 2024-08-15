@@ -2,6 +2,10 @@ package com.revature.byteshare.ingredient.models;
 
 import lombok.*;
 
+/**
+ * Macros class is a component of Ingredient and represents the macronutrients available per serving size
+ * as well as the serving size information
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
