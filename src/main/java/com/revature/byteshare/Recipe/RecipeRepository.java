@@ -1,6 +1,5 @@
-package com.revature.byteshare.recipe;
+package com.revature.byteshare.Recipe;
 
-import com.revature.byteshare.recipe.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

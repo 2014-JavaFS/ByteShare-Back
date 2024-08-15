@@ -1,6 +1,5 @@
-package com.revature.byteshare.recipe;
+package com.revature.byteshare.Recipe;
 
-import com.revature.byteshare.recipe.Recipe;
 import com.revature.byteshare.util.exceptions.DataNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

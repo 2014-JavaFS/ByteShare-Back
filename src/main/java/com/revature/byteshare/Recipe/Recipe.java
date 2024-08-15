@@ -28,14 +28,14 @@ public class Recipe {
     private Timestamp datePosted;
 
     //TODO: Spring annotations for content in Recipe.java; double check this later
-    @Column(name = "content", columnDefinition = "BLOB")
+    @Column(name = "content")
     private String content;
 
     //TODO: double check these annotations
-    @Column(name = "prep_time", columnDefinition = "INTEGER")
+    @Column(name = "prep_time")
     private int prepTime;
 
     //TODO: double check these annotations
-    @Column(name = "cook_time", columnDefinition = "INTEGER")
+    @Column(name = "cook_time")
     private int cookTime;
 }
