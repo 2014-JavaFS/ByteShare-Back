@@ -14,12 +14,11 @@ public class Macros {
     private int servingQuantity;
     private String servingUnit;
     private double gramsPerServing;
-    private double calories;
+    private double calories;  //in kCal
     //below quantities are all in grams
     private double fat;
     private double protein;
 
     private double totalCarbs;
     private double sugars;
-    private double fiber;
 }
