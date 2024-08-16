@@ -16,10 +16,10 @@ public class RecipeIngredientService {
     RecipeRepository recipeRepository;
 
     @Autowired
-    public RecipeIngredientService(RecipeIngredientRepository repository) {
+    public RecipeIngredientService(RecipeIngredientRepository repository, RecipeRepository recipeRepository) {
         this.repository = repository;
+        this.recipeRepository = recipeRepository;
     }
-
 
     public RecipeIngredient createIngredient(RecipeIngredientDto recipeIngredientDto){
         RecipeIngredient recipeIngredient = RecipeIngredient.builder()
@@ -38,10 +38,9 @@ public class RecipeIngredientService {
         recipeIngredient.setIngredientName(recipeIngredientDto.getIngredient());
         recipeIngredient.setRecipe(recipeRepository.findById(recipeIngredientDto.getRecipeId()).
                 orElseThrow(()-> new DataNotFoundException("recipe id not found")));
-        recipeIngredient.setQuantity(recipeIngredient.getQuantity());
-        recipeIngredient.setUnit(recipeIngredient.getUnit());
-        repository.save(recipeIngredient);
-        return recipeIngredient;
+        recipeIngredient.setQuantity(recipeIngredientDto.getQuantity());
+        recipeIngredient.setUnit(recipeIngredientDto.getUnit());
+        return repository.save(recipeIngredient);
     }
 
     public RecipeIngredient findById(int id){
