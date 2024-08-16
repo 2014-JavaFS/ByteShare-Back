@@ -1,6 +1,7 @@
 package com.revature.byteshare.user;
 
 import com.revature.byteshare.util.exceptions.DataNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,7 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
+    @Transactional
     public User updateUser(User updatedUser) {
 
         return userRepository.save(updatedUser);
