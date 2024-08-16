@@ -18,8 +18,8 @@ public class Vote {
     @Id
     @GeneratedValue
     private int vote_id;
-    private User voter;
-    private Post post;      // Post or Recipe?
+    // private User voter;
+    // private Post post;      // Post or Recipe?
     private boolean isUpvote;
 }
 
