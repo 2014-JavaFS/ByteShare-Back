@@ -1,6 +1,6 @@
-package com.revature.byteshare.Tags;
+package com.revature.byteshare.tags;
 
-import com.revature.byteshare.Recipe.Recipe;
+import com.revature.byteshare.recipe.Recipe;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

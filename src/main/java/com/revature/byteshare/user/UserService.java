@@ -1,4 +1,4 @@
-package com.revature.byteshare.User;
+package com.revature.byteshare.user;
 
 import com.revature.byteshare.util.exceptions.DataNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
