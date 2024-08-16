@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class IngredientListCreationDto {
 
-    int ingredientId;
+    String ingredient;
     int recipeId;
     double quantity;
     String unit;

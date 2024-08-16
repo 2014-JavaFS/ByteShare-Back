@@ -1,4 +1,4 @@
-package com.revature.byteshare.Tags;
+package com.revature.byteshare.tags;
 
 public class TagServiceTestSuite {
 }

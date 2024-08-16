@@ -1,4 +1,4 @@
-package com.revature.byteshare.Tags;
+package com.revature.byteshare.tags;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

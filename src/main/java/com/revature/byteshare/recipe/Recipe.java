@@ -1,4 +1,4 @@
-package com.revature.byteshare.Recipe;
+package com.revature.byteshare.recipe;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
