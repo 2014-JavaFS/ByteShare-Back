@@ -1,7 +1,9 @@
 package com.revature.byteshare.favorites;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -9,6 +11,7 @@ public class favoriteService {
 
     private final favoriteRepository favoriteRepository;
 
+    @Autowired
     favoriteService(favoriteRepository favoriteRepository){
         this.favoriteRepository=favoriteRepository;
     }
@@ -19,7 +22,9 @@ public class favoriteService {
 
 
     public List<favorite> findByRecipeID(int recipeID){
-        return favoriteRepository.findByRecipeID(recipeID);
+        //return favoriteRepository.findByRecipeID(recipeID);
+
+        return null;
     }
 
     public List<favorite> findAll(){
@@ -27,14 +32,21 @@ public class favoriteService {
     }
 
     public List<favorite> findAllWithID(int userID){
-        List<favorite> buisnessLogicList;
-        buisnessLogicList=favoriteRepository.findByUserID(userID);
+
+        List<favorite> temp =findAll();
+        List<favorite> buisnessLogicList = new ArrayList<>();
+        for(int i=0; i<temp.size();i++){
+            if(temp.get(i).getAccountAssociatedID() == userID) {
+                buisnessLogicList.add(temp.get(i));
+            }
+        }
+        //buisnessLogicList=favoriteRepository.findByUserID(userID);
         return buisnessLogicList;
     }
 
     public boolean removeFavorite(int userID, int recipeID){
 
-        List<favorite> temp =findAllWithID(userID);
+        List<favorite> temp =findAll();
         for(int i=0; i<temp.size();i++){
             if(temp.get(i).getRecipeToSave() == recipeID) {
                 favoriteRepository.delete(temp.get(i));

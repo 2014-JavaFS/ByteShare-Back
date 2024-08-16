@@ -1,6 +1,8 @@
 package com.revature.byteshare.favorites;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,17 +15,19 @@ public class favoriteController {
     //declarations
     private final favoriteService favoriteService;
 
+    @Autowired
     favoriteController(favoriteService favoriteService){
         this.favoriteService=favoriteService;
     }
 
     @PostMapping
-    public void postAddToFavorites(@RequestHeader("userID") int userID,
-                                   @RequestHeader("recipeID") int recipeID){
+    public ResponseEntity<favorite> postAddToFavorites(@RequestHeader("userID") int userID,
+                                             @RequestHeader("recipeID") int recipeID){
         //TODO ADD INPUT VALIDATION
 
         favorite makingFavorite = new favorite(userID, recipeID);
-        favoriteService.create(makingFavorite);
+
+        return ResponseEntity.status(201).body(favoriteService.create(makingFavorite));
     }
 
     @GetMapping

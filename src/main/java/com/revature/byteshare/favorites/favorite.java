@@ -1,11 +1,10 @@
 package com.revature.byteshare.favorites;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 //JPA
 @Entity
 @Table(name = "favorite")
@@ -22,8 +21,6 @@ public class favorite {
     //TODO Insert Annotations here
     private int recipeToSave;
 
-    //No Args Constructor
-    public favorite(){}
 
     public favorite(int accountAssociatedID, int recipeToSave){
         this.recipeToSave=recipeToSave;
