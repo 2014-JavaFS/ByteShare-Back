@@ -58,12 +58,12 @@ public class UserController {
     }
 
     @PutMapping("/updatePrivliges")
-    private ResponseEntity<User> putUpdateUserTier(@RequestHeader User.userType userType, @RequestBody User updatedUser, @RequestHeader User.userType newType) throws AuthenticationException {
-        if (userType == User.userType.ADMIN) {
-            if (userType == User.userType.AUTHOR && newType == User.userType.ADMIN) {
+    private ResponseEntity<User> putUpdateUserTier(@RequestHeader User.UserType userType, @RequestBody User updatedUser, @RequestHeader User.UserType newType) throws AuthenticationException {
+        if (userType == User.UserType.ADMIN) {
+            if (userType == User.UserType.AUTHOR && newType == User.UserType.ADMIN) {
                 return ResponseEntity.status(HttpStatus.OK).body(userService.updateUserAccessLevel(updatedUser, newType));
             }
-            if (userType == User.userType.AUTHOR && newType == User.userType.USER) {
+            if (userType == User.UserType.AUTHOR && newType == User.UserType.USER) {
                 return ResponseEntity.status(HttpStatus.OK).body(userService.updateUserAccessLevel(updatedUser, newType));
             }
         }

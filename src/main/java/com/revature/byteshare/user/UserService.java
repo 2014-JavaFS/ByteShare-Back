@@ -41,7 +41,7 @@ public class UserService {
         return userRepository.save(updatedUser);
     }
 
-    protected User updateUserAccessLevel(User user, User.userType userType){
+    protected User updateUserAccessLevel(User user, User.UserType userType){
         user.setUser_type(userType);
         return userRepository.save(user);
     }

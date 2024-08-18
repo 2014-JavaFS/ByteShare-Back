@@ -13,6 +13,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,7 +34,7 @@ public class SecurityConfig {
         httpSecurity // allows to configure our web-based security
                 .authorizeHttpRequests(requests -> requests // restricts access based on incoming HTTP Requests
                         .anyRequest().permitAll()) // allows all incoming requests
-                .csrf(csrf -> csrf.disable()) // for Cross-Site Request Forgery since our application is stateless
+                .csrf(AbstractHttpConfigurer::disable) // for Cross-Site Request Forgery since our application is stateless
                 .exceptionHandling(exceptionHandling -> exceptionHandling.authenticationEntryPoint(authEntryPoint)) // specifies our entry point
                 .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)); // disables session management
         httpSecurity.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class); // processes JWT tokens before the standard class

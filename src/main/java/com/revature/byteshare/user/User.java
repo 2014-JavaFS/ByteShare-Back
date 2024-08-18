@@ -36,10 +36,18 @@ public class User {
     //private String auth_token; may not need after all
     @Column(name = "user_type", columnDefinition = "varchar(10) default 'AUTHOR'")
     @Enumerated(EnumType.STRING)
-    private userType user_type;
+    private UserType user_type;
 
-    public enum userType {
+    public enum UserType {
         ADMIN, AUTHOR, USER
+    }
+    public User(String email, String password, String firstName, String lastName, String username, UserType userType) {
+        this.email = email;
+        this.password = password;
+        this.first_name = firstName;
+        this.last_name = lastName;
+        this.username = username;
+        this.user_type = userType;
     }
 
 }
