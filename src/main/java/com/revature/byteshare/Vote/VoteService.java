@@ -46,7 +46,10 @@ public class VoteService {
     }
 
     @Transactional
-    public boolean delete(int voteId) {
+    public boolean delete(int voteId) throws InvalidInputException {
+        if (findById(voteId) == null) {
+            throw new DataNotFoundException("Vote with ID not found, please check again.");
+        }
         voteRepository.deleteById(voteId);
         return true;
     }
