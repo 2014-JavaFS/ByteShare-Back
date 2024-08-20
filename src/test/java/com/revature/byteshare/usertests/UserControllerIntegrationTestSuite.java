@@ -79,6 +79,19 @@ public class UserControllerIntegrationTestSuite {
     }
 
     @Test
+    public void testUpdateUserAccessLevel() throws Exception {
+        when(mockService.updateUserAccessLevel(defaultUser, User.UserType.AUTHOR)).thenReturn(true);
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/users/updatePrivliges")
+                        .header("userType", "ADMIN")
+                        .header("newType", "AUTHOR")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(userJSON))
+                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.content().string(userJSON));
+    }
+
+    @Test
     public void testDeleteUser() throws Exception {
         when(mockService.deleteUser(1)).thenReturn(true);
 

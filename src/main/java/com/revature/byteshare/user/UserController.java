@@ -54,15 +54,19 @@ public class UserController {
     }
 
     @PutMapping("/updatePrivliges")
-    private ResponseEntity<User> putUpdateUserTier(@RequestHeader User.UserType userType, @RequestBody User updatedUser, @RequestHeader User.UserType newType) throws AuthenticationException {
+    private ResponseEntity<Boolean> putUpdateUserAccessLevel(@RequestHeader User.UserType userType, @RequestBody User updatedUser, @RequestHeader User.UserType newType) throws AuthenticationException {
         if (userType == User.UserType.ADMIN) {
             if (userType == User.UserType.AUTHOR && newType == User.UserType.ADMIN) {
-                return ResponseEntity.status(HttpStatus.OK).body(userService.updateUserAccessLevel(updatedUser, newType));
+                userService.updateUserAccessLevel(updatedUser, newType);
+                return ResponseEntity.status(HttpStatus.OK).body(true);
             }
+
             if (userType == User.UserType.AUTHOR && newType == User.UserType.USER) {
-                return ResponseEntity.status(HttpStatus.OK).body(userService.updateUserAccessLevel(updatedUser, newType));
+                userService.updateUserAccessLevel(updatedUser, newType);
+                return ResponseEntity.status(HttpStatus.OK).body(true);
             }
         }
+
         throw new AuthenticationException("You do not have permissions to perform this action.");
     }
 

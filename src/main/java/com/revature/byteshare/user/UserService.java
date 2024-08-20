@@ -46,8 +46,9 @@ public class UserService {
         return true;
     }
 
-    protected User updateUserAccessLevel(User user, User.UserType userType){
+    public boolean updateUserAccessLevel(User user, User.UserType userType){
         user.setUserType(userType);
-        return userRepository.save(user);
+        userRepository.save(user);
+        return true;
     }
 }

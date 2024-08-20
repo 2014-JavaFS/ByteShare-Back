@@ -79,6 +79,14 @@ public class UserServiceTestSuite {
     }
 
     @Test
+    public void testUpdateUserAccessLevel() {
+        when(mockRepo.save(defaultUser)).thenReturn(defaultUser);
+
+        assertTrue(sut.updateUserAccessLevel(defaultUser, User.UserType.AUTHOR));
+        verify(mockRepo, times(1)).save(defaultUser);
+    }
+
+    @Test
     public void testDeleteUser() {
         assertTrue(sut.deleteUser(defaultUser.getUserId()));
         verify(mockRepo, times(1)).deleteById(defaultUser.getUserId());
