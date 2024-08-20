@@ -36,13 +36,18 @@ public class UserService {
     }
 
     @Transactional
-    public User updateUser(User updatedUser) {
+    public boolean updateUser(User updatedUser) {
+        userRepository.save(updatedUser);
+        return true;
+    }
 
-        return userRepository.save(updatedUser);
+    public boolean deleteUser(int userId) {
+        userRepository.deleteById(userId);
+        return true;
     }
 
     protected User updateUserAccessLevel(User user, User.UserType userType){
-        user.setUser_type(userType);
+        user.setUserType(userType);
         return userRepository.save(user);
     }
 }

@@ -43,17 +43,13 @@ public class UserController {
 
     @DeleteMapping("/{userId}")
     private ResponseEntity<Void> deleteUserById(@PathVariable int userId) {
+        userService.deleteUser(userId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PutMapping
     private ResponseEntity<User> putUpdateUser(@Valid @RequestBody User updatedUser) {
-        User updateUser = userService.updateUser(updatedUser);
-
-        if (updatedUser == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
-
+        userService.updateUser(updatedUser);
         return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }
 

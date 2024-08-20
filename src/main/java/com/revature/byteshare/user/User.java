@@ -36,7 +36,7 @@ public class User {
     //private String auth_token; may not need after all
     @Column(name = "user_type", columnDefinition = "varchar(10) default 'AUTHOR'")
     @Enumerated(EnumType.STRING)
-    private UserType user_type;
+    private UserType userType;
 
     public enum UserType {
         ADMIN, AUTHOR, USER
@@ -47,7 +47,7 @@ public class User {
         this.first_name = firstName;
         this.last_name = lastName;
         this.username = username;
-        this.user_type = userType;
+        this.userType = userType;
     }
 
 }
