@@ -20,14 +20,24 @@ public class FollowController {
         this.userService = userService;
     }
 
-    @GetMapping("/following")//might change args to allow seeing someone else's
+    @GetMapping("/following")
     public ResponseEntity<List<Follow>> getFollowing(@RequestHeader int currentUserId) {
         return ResponseEntity.ok(followService.findAllFollowing(currentUserId));
     }
 
-    @GetMapping("/followers")//might change args to allow seeing someone else's
+    @GetMapping("/followers")
     public ResponseEntity<List<Follow>> getFollowers(@RequestHeader int currentUserId) {
         return ResponseEntity.ok().body(followService.findAllFollowers(currentUserId));
+    }
+
+    @GetMapping("/following/user")
+    public ResponseEntity<List<Follow>> getFollowingOfUser(@RequestParam int userId) {
+        return ResponseEntity.ok(followService.findAllFollowing(userId));
+    }
+
+    @GetMapping("/followers/user")
+    public ResponseEntity<List<Follow>> getFollowersOfUser(@RequestParam int userId) {
+        return ResponseEntity.ok(followService.findAllFollowers(userId));
     }
 
     @PostMapping
