@@ -10,7 +10,7 @@ import java.util.List;
 
 @CrossOrigin(origins = {"http://localhost:5173"})
 @RestController
-@RequestMapping("/follow")//trying something
+@RequestMapping("/follow")
 public class FollowController {
     private final FollowService followService;
 
@@ -19,12 +19,12 @@ public class FollowController {
         this.followService = followService;
     }
 
-    @GetMapping("ing")//trying something
+    @GetMapping("/following")//might change args to allow seeing someone else's
     public ResponseEntity<List<Follow>> getFollowing(@RequestHeader User currentUser) {
         return ResponseEntity.ok(followService.findAllFollowing(currentUser.getUser_id()));
     }
 
-    @GetMapping("ers")//trying something
+    @GetMapping("/followers")//might change args to allow seeing someone else's
     public ResponseEntity<List<Follow>> getFollowers(@RequestHeader User currentUser) {
         return ResponseEntity.ok(followService.findAllFollowers(currentUser.getUser_id()));
     }
