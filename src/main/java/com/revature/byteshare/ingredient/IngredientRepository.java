@@ -21,7 +21,6 @@ import java.util.List;
  */
 
 @Repository
-@Component
 public class IngredientRepository {
     private final String baseURL = "https://trackapi.nutritionix.com";
     private final String searchEndpoint = "/v2/search/instant?query=";
@@ -32,11 +31,10 @@ public class IngredientRepository {
     @Value("${nutritionix.app-key}")
     private String appKey;
 
-
-    @Setter //setter is used for testing purposed
+    @Setter //setter is used for testing purposes
     private HttpClient client;
 
-    public IngredientRepository() { //constructor Spring will use
+    public IngredientRepository() {
         this.client = HttpClient.newHttpClient();
     }
 
