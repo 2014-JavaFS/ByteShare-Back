@@ -1,4 +1,4 @@
-package com.revature.byteshare.following;
+package com.revature.byteshare.follow;
 
 import com.revature.byteshare.user.User;
 import jakarta.persistence.*;

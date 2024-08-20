@@ -1,4 +1,4 @@
-package com.revature.byteshare.following;
+package com.revature.byteshare.follow;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

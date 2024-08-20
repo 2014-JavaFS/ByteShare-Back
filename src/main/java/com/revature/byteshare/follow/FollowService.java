@@ -1,4 +1,4 @@
-package com.revature.byteshare.following;
+package com.revature.byteshare.follow;
 
 import com.revature.byteshare.util.exceptions.DataNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
