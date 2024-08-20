@@ -1,7 +1,9 @@
 package com.revature.byteshare.ingredient;
 
 import com.revature.byteshare.ingredient.models.Ingredient;
+import com.revature.byteshare.ingredient.models.Ingredient.IngredientBuilder;
 import com.revature.byteshare.ingredient.models.Macros;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -35,7 +37,14 @@ public class IngredientControllerIntegrationTestSuite {
     private final Macros hamburgerMacros = new Macros(1.0, "sandwich", 226.0,
             540.14, 26.56, 34.28, 40.27, 0.0);
 
-    private final String hamburgerNoMacrosJson = "";
+    private final String hamburgerNoMacrosJson = "{\"ingredientName\":\"hamburger\",\"tagId\":608,\"photoURL\":\"image:url\",\"macros\":{\"servingQuantity\":0.0,\"servingUnit\":null,\"gramsPerServing\":0.0,\"calories\":0.0,\"fat\":0.0,\"protein\":0.0,\"totalCarbs\":0.0,\"sugars\":0.0}}";
+    private final String hamburgerWithMacrosJson = "{\"ingredientName\":\"hamburger\",\"tagId\":608,\"photoURL\":\"image:url\",\"macros\":{\"servingQuantity\":1.0,\"servingUnit\":\"sandwich\",\"gramsPerServing\":226.0,\"calories\":540.14,\"fat\":26.56,\"protein\":34.28,\"totalCarbs\":40.27,\"sugars\":0.0}}";
+    private final String hamburgerMacrosJson = "{\"servingQuantity\":1.0,\"servingUnit\":\"sandwich\",\"gramsPerServing\":226.0,\"calories\":540.14,\"fat\":26.56,\"protein\":34.28,\"totalCarbs\":40.27,\"sugars\":0.0}";
+
+    @BeforeEach
+    public void setUp() {
+        hamburgerIngredient.setMacros(null);
+    }
 
     @Test
     public void testSearchForHamburger() throws Exception {
@@ -50,11 +59,28 @@ public class IngredientControllerIntegrationTestSuite {
 
     @Test
     public void testPopulateHamburgerMacros() throws Exception {
+        Ingredient fullHamburger = Ingredient.builder()
+                .ingredientName(hamburgerIngredient.getIngredientName())
+                .tagId(hamburgerIngredient.getTagId())
+                .photoURL(hamburgerIngredient.getPhotoURL())
+                .macros(hamburgerMacros)
+                .build();
+        when(ingredientService.populateMacros(hamburgerIngredient)).thenReturn(fullHamburger);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/ingredients/macros")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(hamburgerNoMacrosJson))
+                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.content().string(hamburgerWithMacrosJson));
 
     }
 
     @Test
     public void testSearchHamburgerMacros() throws Exception {
+        when(ingredientService.getMacrosFor(hamburger)).thenReturn(hamburgerMacros);
 
+        mockMvc.perform(MockMvcRequestBuilders.get(("/ingredients/macros?ingredientName="+hamburger)))
+                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.content().string(hamburgerMacrosJson));
     }
 }
