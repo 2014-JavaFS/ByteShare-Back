@@ -46,7 +46,7 @@ public class favoriteService {
 
     public boolean removeFavorite(int userID, int recipeID){
 
-        List<favorite> temp =findAll();
+        List<favorite> temp =favoriteRepository.findAll();
         for(int i=0; i<temp.size();i++){
             if(temp.get(i).getRecipeToSave() == recipeID) {
                 favoriteRepository.delete(temp.get(i));

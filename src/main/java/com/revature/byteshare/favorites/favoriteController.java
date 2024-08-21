@@ -23,7 +23,9 @@ public class favoriteController {
     @PostMapping
     public ResponseEntity<favorite> postAddToFavorites(@RequestHeader("userID") int userID,
                                              @RequestHeader("recipeID") int recipeID){
-        //TODO ADD INPUT VALIDATION
+        if(userID <=0 || recipeID <=0){
+            return ResponseEntity.status(400).body(null);
+        }
 
         favorite makingFavorite = new favorite(userID, recipeID);
 
@@ -31,16 +33,22 @@ public class favoriteController {
     }
 
     @GetMapping
-    public List<favorite> getUsersFavorites(@RequestHeader int userID){
-        //TODO ADD INPUT VALIDATION
-        return favoriteService.findAllWithID(userID);
+    public ResponseEntity<List<favorite>> getUsersFavorites(@RequestHeader int userID){
+
+        if(userID <=0 ){
+            return ResponseEntity.status(400).body(null);
+        }
+
+        return ResponseEntity.status(200).body(favoriteService.findAllWithID(userID));
     }
 
     @DeleteMapping
-    public void deleteFromFavorites(@RequestHeader("recipeID") int recipeID,
+    public ResponseEntity<String> deleteFromFavorites(@RequestHeader("recipeID") int recipeID,
                                     @RequestHeader("userID") int userID){
 
-        //TODO ADD INPUT VALIDATION
+        if(userID <=0 || recipeID <=0){
+            return ResponseEntity.status(400).body(null);
+        }
 
         /*To get to here input validation has already occurred so the recipe exists
         and the user exists therefore we call for the removal service.
@@ -55,11 +63,15 @@ public class favoriteController {
 
             //TEMP to Hold Message
             System.out.println("Removed Recipe From Favorites");
+            //Testing Return
+            return ResponseEntity.status(200).body("Removed from Favorites");
         }
         else{
             //TODO: PUT LOGGING/RETURN TO USER MESSAGE HERE
             //TEMP to Hold Message
             System.out.println("User doesn't have that recipe favorited");
+            //Testing return
+            return ResponseEntity.status(200).body("Failed to remove from Favorites");
         }
     }
 

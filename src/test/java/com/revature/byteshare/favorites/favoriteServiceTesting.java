@@ -1,6 +1,7 @@
 package com.revature.byteshare.favorites;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
@@ -40,10 +41,6 @@ public class favoriteServiceTesting {
 
     }
 
-    @Test
-    public void testGetByRecipeID(){
-
-    }
 
     @Test
     public void testCreate(){
@@ -58,9 +55,12 @@ public class favoriteServiceTesting {
 
     @Test
     public void testDelete(){
+        //@TODO Implement whenever/If we switch from back end filtering to custom Query filtering
         favorite temp2= new favorite(1,1,3);
-        //TODO Figure out how to Mock this to actually work
         //when(testingService.removeFavorite(1,3)).thenReturn(true);
+        List<favorite> forMocking = new ArrayList<>();
+        doReturn(forMocking).when(testingRepository).findAll();
+
         boolean toCheck =false;
 
         toCheck=testingService.removeFavorite(1,3);
