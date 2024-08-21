@@ -46,15 +46,15 @@ public class AuthController {
     }
 
     @PostMapping("register")
-    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
+    public ResponseEntity<User> register(@RequestBody RegisterDto registerDto) {
         System.out.println("Hit");
         User user = authService.register(registerDto);
         if (user != null) {
-            return new ResponseEntity<>("Username is taken!", HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
         User registeredUser = new User(registerDto.getEmail(), passwordEncoder.encode(registerDto.getPassword()), registerDto.getFirstName(), registerDto.getLastName(), registerDto.getUsername(),registerDto.getUserType());
         User newUser = userService.createUser(registeredUser);
-        return new ResponseEntity<>("User was successfully register", HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(newUser);
     }
 
     /**
@@ -64,9 +64,8 @@ public class AuthController {
      * @param loginDto the form contianing login details
      */
 
-    @CrossOrigin(origins="http://localhost:5173")
     @PostMapping("login")
-    private ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         int id = userService.lookupUserIdByEmail(loginDto.getEmail());
