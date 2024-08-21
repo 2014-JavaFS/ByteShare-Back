@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
-public class favoriteServiceTesting {
+public class FavoriteServiceTesting {
 
     @Mock
     private FavoriteRepository testingRepository;

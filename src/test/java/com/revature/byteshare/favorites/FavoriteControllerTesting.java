@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class favoriteControllerTesting {
+public class FavoriteControllerTesting {
 
     @Autowired
     private MockMvc mockMvc;

@@ -9,7 +9,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("Favorite")
+@RequestMapping("/favorite")
 public class FavoriteController {
 
     //declarations
