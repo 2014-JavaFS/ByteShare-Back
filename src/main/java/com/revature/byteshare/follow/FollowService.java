@@ -17,19 +17,25 @@ public class FollowService {
     }
 
     public List<Follow> findAllFollowing(int userId) {
-        return followRepository.findAllByFollower(userId)
-                .orElseThrow(() -> new DataNotFoundException("User not following any users"));
+        List<Follow> follows = followRepository.findAllByFollower(userId);
+        if (follows.isEmpty())
+            throw new DataNotFoundException("User not following any users");
+        else
+            return follows;
     }
 
     public List<Follow> findAllFollowers(int userId) {
-        return followRepository.findAllByFollowing(userId)
-                .orElseThrow(() -> new DataNotFoundException("User has no followers"));
+        List<Follow> follows = followRepository.findAllByFollowing(userId);
+        if (follows.isEmpty())
+            throw new DataNotFoundException("User has no followers");
+        else
+            return follows;
     }
 
     public Follow createFollow(Follow follow) {
         if (follow.getFollower().getUser_id() == follow.getFollowing().getUser_id())
             throw new InvalidInputException("User cannot follow themself");
-        else //if you don't like this if statement format: 😛
+        else
             return followRepository.save(follow);
     }
 
