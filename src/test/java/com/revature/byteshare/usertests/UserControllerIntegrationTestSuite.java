@@ -28,9 +28,6 @@ public class UserControllerIntegrationTestSuite {
     private UserService mockService;
 
     @Autowired
-    private UserController sut;
-
-    @Autowired
     private MockMvc mockMvc;
 
     private static User defaultUser = new User(1, "test@mail.com", "IaMaK1NgThis@Passw0rd", "testuser028", "Arjun", "Ramsinghani", User.UserType.ADMIN);
@@ -82,13 +79,13 @@ public class UserControllerIntegrationTestSuite {
     public void testUpdateUserAccessLevel() throws Exception {
         when(mockService.updateUserAccessLevel(defaultUser, User.UserType.AUTHOR)).thenReturn(true);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/users/updatePrivliges")
+        mockMvc.perform(MockMvcRequestBuilders.put("/users/update-privileges")
                         .header("userType", "ADMIN")
                         .header("newType", "AUTHOR")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(userJSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
-                .andExpect(MockMvcResultMatchers.content().string(userJSON));
+                .andExpect(MockMvcResultMatchers.content().string("true"));
     }
 
     @Test
