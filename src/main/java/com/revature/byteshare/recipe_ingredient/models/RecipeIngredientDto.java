@@ -1,4 +1,4 @@
-package com.revature.byteshare.ingredient_list.models;
+package com.revature.byteshare.recipe_ingredient.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class IngredientListCreationDto {
+public class RecipeIngredientDto {
 
     String ingredient;
     int recipeId;
