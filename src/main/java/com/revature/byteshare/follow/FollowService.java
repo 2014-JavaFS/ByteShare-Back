@@ -1,6 +1,7 @@
 package com.revature.byteshare.follow;
 
 import com.revature.byteshare.util.exceptions.DataNotFoundException;
+import com.revature.byteshare.util.exceptions.InvalidInputException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,10 @@ public class FollowService {
     }
 
     public Follow createFollow(Follow follow) {
-        return followRepository.save(follow);
+        if (follow.getFollower().getUser_id() == follow.getFollowing().getUser_id())
+            throw new InvalidInputException("User cannot follow themself");
+        else //if you don't like this if statement format: 😛
+            return followRepository.save(follow);
     }
 
     public boolean deleteFollow(int followerId, int followingId) {
