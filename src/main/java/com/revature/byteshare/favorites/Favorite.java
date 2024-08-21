@@ -8,7 +8,7 @@ import lombok.*;
 //JPA
 @Entity
 @Table(name = "favorite")
-public class favorite {
+public class Favorite {
 
 
     //Declaring Variables
@@ -22,7 +22,7 @@ public class favorite {
     private int recipeToSave;
 
 
-    public favorite(int accountAssociatedID, int recipeToSave){
+    public Favorite(int accountAssociatedID, int recipeToSave){
         this.recipeToSave=recipeToSave;
         this.accountAssociatedID=accountAssociatedID;
     }

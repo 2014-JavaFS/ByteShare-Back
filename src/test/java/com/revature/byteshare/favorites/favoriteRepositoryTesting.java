@@ -1,6 +1,6 @@
 package com.revature.byteshare.favorites;
 
-import com.revature.byteshare.favorites.favoriteRepository;
+import com.revature.byteshare.favorites.FavoriteRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class favoriteRepositoryTesting {
 
     @Autowired
-    private favoriteRepository repository;
+    private FavoriteRepository repository;
 
 
     @Autowired
@@ -25,12 +25,12 @@ public class favoriteRepositoryTesting {
 
     @Test
     public void testSaving(){
-        favorite tempFavorite = new favorite(1,2,3);
-        favorite toCheck = new favorite();
+        Favorite tempFavorite = new Favorite(1,2,3);
+        Favorite toCheck = new Favorite();
         toCheck=repository.save(tempFavorite);
         assertNotNull(toCheck);
         assertEquals(toCheck.getFavoriteSerialID(), tempFavorite.getFavoriteSerialID());
-        List<favorite> getting = repository.findAll();
+        List<Favorite> getting = repository.findAll();
         toCheck=null;
         for(int i=0;i<getting.size();i++){
             if(getting.get(i).getAccountAssociatedID()==2 && getting.get(i).getRecipeToSave()==3)
@@ -44,7 +44,7 @@ public class favoriteRepositoryTesting {
     public void testDeleting(){
 
         assertEquals( 0,repository.count());
-        favorite tempFavorite = new favorite(1,2,3);
+        Favorite tempFavorite = new Favorite(1,2,3);
         repository.save(tempFavorite);
         assertEquals( 1,repository.count());
         repository.delete(tempFavorite);

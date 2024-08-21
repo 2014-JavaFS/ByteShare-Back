@@ -10,30 +10,30 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("Favorite")
-public class favoriteController {
+public class FavoriteController {
 
     //declarations
-    private final favoriteService favoriteService;
+    private final FavoriteService favoriteService;
 
     @Autowired
-    favoriteController(favoriteService favoriteService){
+    FavoriteController(FavoriteService favoriteService){
         this.favoriteService=favoriteService;
     }
 
     @PostMapping
-    public ResponseEntity<favorite> postAddToFavorites(@RequestHeader("userID") int userID,
+    public ResponseEntity<Favorite> postAddToFavorites(@RequestHeader("userID") int userID,
                                              @RequestHeader("recipeID") int recipeID){
         if(userID <=0 || recipeID <=0){
             return ResponseEntity.status(400).body(null);
         }
 
-        favorite makingFavorite = new favorite(userID, recipeID);
+        Favorite makingFavorite = new Favorite(userID, recipeID);
 
         return ResponseEntity.status(201).body(favoriteService.create(makingFavorite));
     }
 
     @GetMapping
-    public ResponseEntity<List<favorite>> getUsersFavorites(@RequestHeader int userID){
+    public ResponseEntity<List<Favorite>> getUsersFavorites(@RequestHeader int userID){
 
         if(userID <=0 ){
             return ResponseEntity.status(400).body(null);

@@ -17,26 +17,26 @@ import java.util.List;
 public class favoriteServiceTesting {
 
     @Mock
-    private favoriteRepository testingRepository;
+    private FavoriteRepository testingRepository;
 
     @InjectMocks
-    private favoriteService testingService;
+    private FavoriteService testingService;
 
     @Test
     public void testGetByUserID(){
-        favorite temp = new favorite();
+        Favorite temp = new Favorite();
         temp.setFavoriteSerialID(3);
         temp.setAccountAssociatedID(1);
         temp.setRecipeToSave(1);
-        favorite temp2= new favorite(1,1,3);
+        Favorite temp2= new Favorite(1,1,3);
 
-        List<favorite> toCheck = new ArrayList<>();
+        List<Favorite> toCheck = new ArrayList<>();
         toCheck.add(temp);
         toCheck.add(temp2);
 
         when(testingService.findAllWithID(1)).thenReturn(toCheck);
 
-        List<favorite> checking = testingService.findAllWithID(1);
+        List<Favorite> checking = testingService.findAllWithID(1);
         assertEquals(toCheck.get(1).getFavoriteSerialID(),checking.get(1).getFavoriteSerialID());
 
     }
@@ -44,10 +44,10 @@ public class favoriteServiceTesting {
 
     @Test
     public void testCreate(){
-        favorite temp2= new favorite(1,1,3);
+        Favorite temp2= new Favorite(1,1,3);
         when(testingService.create(temp2)).thenReturn(temp2);
 
-        favorite check = testingService.create(temp2);
+        Favorite check = testingService.create(temp2);
         assertEquals(temp2.getFavoriteSerialID(), check.getFavoriteSerialID());
         assertEquals(temp2.getRecipeToSave(), check.getRecipeToSave());
         assertEquals(temp2.getRecipeToSave(), check.getRecipeToSave());
@@ -56,9 +56,9 @@ public class favoriteServiceTesting {
     @Test
     public void testDelete(){
         //@TODO Implement whenever/If we switch from back end filtering to custom Query filtering
-        favorite temp2= new favorite(1,1,3);
+        Favorite temp2= new Favorite(1,1,3);
         //when(testingService.removeFavorite(1,3)).thenReturn(true);
-        List<favorite> forMocking = new ArrayList<>();
+        List<Favorite> forMocking = new ArrayList<>();
         doReturn(forMocking).when(testingRepository).findAll();
 
         boolean toCheck =false;

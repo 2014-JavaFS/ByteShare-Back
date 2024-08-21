@@ -23,16 +23,16 @@ public class favoriteControllerTesting {
     private MockMvc mockMvc;
 
     @MockBean
-    private favoriteService mockedFavoriteService;
+    private FavoriteService mockedFavoriteService;
 
     @MockBean
-    private favoriteRepository mockedFavoriteRepository;
+    private FavoriteRepository mockedFavoriteRepository;
 
     @Mock
     private RestTemplate restTemplate;
 
     @Captor
-    private ArgumentCaptor<favorite> favoriteArgumentCaptor;
+    private ArgumentCaptor<Favorite> favoriteArgumentCaptor;
 
     @Autowired
     private ObjectMapper objectMapper;
