@@ -1,4 +1,4 @@
-package com.revature.byteshare.Tags;
+package com.revature.byteshare.tags;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.revature.byteshare.User;
+package com.revature.byteshare.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -39,4 +39,5 @@ public class User {
     public enum userType {
         ADMIN, AUTHOR, USER
     }
+
 }
