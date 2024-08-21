@@ -122,7 +122,7 @@ public class FollowControllerIntegrationTestSuite {
 
     @Test
     public void testDeleteFollow() throws Exception {
-        when(followService.deleteFollow(defaultFollower.getUser_id(), defaultFollowing.getUser_id()))
+        when(followService.deleteFollow(defaultFollow))
                 .thenReturn(true);
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/follow?followingId="

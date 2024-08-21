@@ -32,6 +32,11 @@ public class FollowService {
             return follows;
     }
 
+    public Follow findByFollowerAndFollowing(int followerId, int followingId) {
+        return followRepository.findByFollowerAndFollowing(followerId, followingId)
+                .orElseThrow(() -> new DataNotFoundException("Current user is not following that user"));
+    }
+
     public Follow createFollow(Follow follow) {
         if (follow.getFollower().getUser_id() == follow.getFollowing().getUser_id())
             throw new InvalidInputException("User cannot follow themself");
@@ -39,9 +44,7 @@ public class FollowService {
             return followRepository.save(follow);
     }
 
-    public boolean deleteFollow(int followerId, int followingId) {
-        Follow unfollow = followRepository.findByFollowerAndFollowing(followerId, followingId)
-                .orElseThrow(() -> new DataNotFoundException("Follow record not found."));
+    public boolean deleteFollow(Follow unfollow) {
         followRepository.delete(unfollow);
         return true;
     }

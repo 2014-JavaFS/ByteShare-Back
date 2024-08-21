@@ -51,7 +51,8 @@ public class FollowController {
 
     @DeleteMapping
     public ResponseEntity<Boolean> deleteFollow(@RequestHeader int currentUserId, @RequestParam int followingId) {
-        followService.deleteFollow(currentUserId, followingId);
+        Follow toUnfollow = followService.findByFollowerAndFollowing(currentUserId, followingId);
+        followService.deleteFollow(toUnfollow);
         return ResponseEntity.noContent().build();
     }
 }
