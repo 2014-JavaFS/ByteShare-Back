@@ -9,9 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -37,22 +34,34 @@ public class IngredientServiceUnitTestSuite {
 
     @Test
     public void testHamburgerSearch() throws Exception {
-        String query = hamburgerIngredient.getIngredientName();
-        when(mockRepo.searchFor(query)).thenReturn(List.of(hamburgerIngredient));
+        when(mockRepo.searchFor(hamburger)).thenReturn(List.of(hamburgerIngredient));
 
-        List<Ingredient> result = ingredientService.searchFor(query);
+        List<Ingredient> result = ingredientService.searchFor(hamburger);
         assertEquals(1, result.size());
         assertEquals(hamburgerIngredient, result.get(0));
     }
 
     @Test
     public void testPopulateMacros() throws Exception {
+        when(mockRepo.getMacrosFor(hamburger)).thenReturn(hamburgerMacros);
 
+        Ingredient result = ingredientService.populateMacros(hamburgerIngredient);
+        assertEquals(result, hamburgerIngredient);
+        assertEquals(hamburgerMacros, hamburgerIngredient.getMacros());
     }
 
     @Test
     public void testGetMacros() throws Exception {
+        when(mockRepo.getMacrosFor(hamburger)).thenReturn(hamburgerMacros);
 
+        Macros result = ingredientService.getMacrosFor(hamburger);
+        assertNotNull(result);
+        assertEquals(hamburgerMacros, result);
+    }
+
+    @Test
+    public void testPopulateMacrosThrowsNullPointerException() throws Exception {
+        assertThrows(NullPointerException.class, () -> ingredientService.populateMacros(null));
     }
 
 }

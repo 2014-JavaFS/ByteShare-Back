@@ -1,14 +1,16 @@
 package com.revature.byteshare.ingredient;
 
 import com.revature.byteshare.ingredient.models.Ingredient;
-import com.revature.byteshare.ingredient.models.Ingredient.IngredientBuilder;
 import com.revature.byteshare.ingredient.models.Macros;
+import com.revature.byteshare.util.aspects.ExceptionAspect;
+import com.revature.byteshare.util.exceptions.NutritionixException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -19,7 +21,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 
-@SpringBootTest(classes = {IngredientController.class})
+@SpringBootTest(classes = {IngredientController.class, ExceptionAspect.class})
 @AutoConfigureMockMvc
 @EnableWebMvc
 public class IngredientControllerIntegrationTestSuite {
@@ -53,7 +55,7 @@ public class IngredientControllerIntegrationTestSuite {
 
         mockMvc.perform(MockMvcRequestBuilders.get(("/ingredients/hamburger"))
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
                 .andExpect(MockMvcResultMatchers.content().string(expectedResult));
     }
 
@@ -70,7 +72,7 @@ public class IngredientControllerIntegrationTestSuite {
         mockMvc.perform(MockMvcRequestBuilders.post("/ingredients/macros")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(hamburgerNoMacrosJson))
-                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
                 .andExpect(MockMvcResultMatchers.content().string(hamburgerWithMacrosJson));
 
     }
@@ -80,7 +82,15 @@ public class IngredientControllerIntegrationTestSuite {
         when(ingredientService.getMacrosFor(hamburger)).thenReturn(hamburgerMacros);
 
         mockMvc.perform(MockMvcRequestBuilders.get(("/ingredients/macros?ingredientName="+hamburger)))
-                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
                 .andExpect(MockMvcResultMatchers.content().string(hamburgerMacrosJson));
+    }
+
+    @Test
+    public void testThrowsNutritionixException() throws Exception {
+        when(ingredientService.getMacrosFor(hamburger)).thenThrow(NutritionixException.class);
+
+        mockMvc.perform(MockMvcRequestBuilders.get(("/ingredients/macros?ingredientName="+hamburger)))
+                .andExpect(MockMvcResultMatchers.status().is(HttpStatus.FAILED_DEPENDENCY.value()));
     }
 }

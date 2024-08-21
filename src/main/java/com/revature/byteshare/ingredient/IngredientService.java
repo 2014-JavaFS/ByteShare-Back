@@ -1,9 +1,9 @@
 package com.revature.byteshare.ingredient;
 
 import com.revature.byteshare.ingredient.models.*;
+import com.revature.byteshare.util.exceptions.NutritionixException;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -14,22 +14,19 @@ public class IngredientService {
         this.ingredientRepository = ingredientRepository;
     }
 
-    public List<Ingredient> searchFor(String query) throws IOException, InterruptedException {
+    public List<Ingredient> searchFor(String query) throws NutritionixException {
         return ingredientRepository.searchFor(query);
     }
 
-    public Ingredient populateMacros(Ingredient ingredient) throws IOException, InterruptedException {
+    public Ingredient populateMacros(Ingredient ingredient) throws NutritionixException {
         if(ingredient == null){
             throw new NullPointerException("Ingredient is null");
-        }
-        if(ingredient.getMacros() != null){
-            throw new IllegalArgumentException("Macros are already populated");
         }
         ingredient.setMacros(ingredientRepository.getMacrosFor(ingredient.getIngredientName()));
         return ingredient;
     }
 
-    public Macros getMacrosFor(String ingredientName) throws IOException, InterruptedException {
+    public Macros getMacrosFor(String ingredientName) throws NutritionixException {
         return ingredientRepository.getMacrosFor(ingredientName);
     }
 }

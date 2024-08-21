@@ -3,9 +3,9 @@ package com.revature.byteshare.ingredient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.byteshare.ingredient.models.*;
+import com.revature.byteshare.util.exceptions.NutritionixException;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
@@ -32,14 +32,9 @@ public class IngredientRepository {
     private String appKey;
 
     @Setter //setter is used for testing purposes
-    private HttpClient client;
+    private HttpClient client = HttpClient.newHttpClient();
 
-    public IngredientRepository() {
-        this.client = HttpClient.newHttpClient();
-    }
-
-
-    public List<Ingredient> searchFor(String search) throws IOException, InterruptedException {
+    public List<Ingredient> searchFor(String search) throws NutritionixException {
         HttpRequest request = HttpRequest.newBuilder(
                 URI.create(baseURL+searchEndpoint+search))
                 .header("accept", "application/json")
@@ -47,12 +42,16 @@ public class IngredientRepository {
                 .header("x-app-key", appKey)
                 .header("x-remote-user-id", "0").build();
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        return getCommonIngredientsFromJson(response.body());
+            return getCommonIngredientsFromJson(response.body());
+        } catch (IOException | InterruptedException | NullPointerException | IllegalArgumentException e) {
+            throw new NutritionixException(e.getMessage());
+        }
     }
 
-    public Macros getMacrosFor(String ingredientName) throws IOException, InterruptedException{
+    public Macros getMacrosFor(String ingredientName) throws NutritionixException {
         String body = String.format("{\"query\": \"%s\"}", ingredientName);
         HttpRequest request = HttpRequest.newBuilder(
                         URI.create(baseURL+nutritionEndpoint))
@@ -63,9 +62,13 @@ public class IngredientRepository {
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .build();
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        return getMacrosFromJson(response.body());
+            return getMacrosFromJson(response.body());
+        } catch (IOException | InterruptedException | NullPointerException | IllegalArgumentException e) {
+            throw new NutritionixException(e.getMessage());
+        }
     }
 
     private List<Ingredient> getCommonIngredientsFromJson(String json) throws JsonProcessingException {

@@ -1,6 +1,7 @@
 package com.revature.byteshare.ingredient;
 
 import com.revature.byteshare.ingredient.models.*;
+import com.revature.byteshare.util.exceptions.NutritionixException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -69,5 +70,22 @@ public class IngredientRepositoryIntegrationTestSuite {
 
         assertNotNull(result);
         assertEquals(hamburgerMacros, result);
+    }
+
+    @Test
+    public void testThrowsNutritionixExceptionWhenResponseIsNull() throws Exception{
+        doReturn(null).when(client).send(any(), any());
+
+        assertThrows(NutritionixException.class, () -> {repo.searchFor(hamburger);});
+        assertThrows(NutritionixException.class, () -> {repo.getMacrosFor(hamburger);});
+    }
+
+    @Test
+    public void testThrowsNutritionixExceptionWhenBodyIsNull() throws Exception{
+        doReturn(null).when(mockResponse).body();
+        doReturn(mockResponse).when(client).send(any(), any());
+
+        assertThrows(NutritionixException.class, () -> {repo.searchFor(hamburger);});
+        assertThrows(NutritionixException.class, () -> {repo.getMacrosFor(hamburger);});
     }
 }
