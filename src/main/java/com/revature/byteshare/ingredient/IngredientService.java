@@ -2,6 +2,7 @@ package com.revature.byteshare.ingredient;
 
 import com.revature.byteshare.ingredient.models.*;
 import com.revature.byteshare.util.exceptions.NutritionixException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 public class IngredientService {
     public final IngredientRepository ingredientRepository;
 
+    @Autowired
     public IngredientService(IngredientRepository ingredientRepository) {
         this.ingredientRepository = ingredientRepository;
     }

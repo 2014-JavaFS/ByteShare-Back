@@ -1,6 +1,7 @@
 package com.revature.byteshare.ingredient;
 
 import com.revature.byteshare.ingredient.models.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,7 @@ import java.util.List;
 public class IngredientController {
     private final IngredientService ingredientService;
 
+    @Autowired
     public IngredientController(IngredientService ingredientService) {
         this.ingredientService = ingredientService;
     }

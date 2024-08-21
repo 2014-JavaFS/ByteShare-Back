@@ -21,7 +21,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 
-@SpringBootTest(classes = {IngredientController.class, ExceptionAspect.class})
+@SpringBootTest(classes = {IngredientController.class})
 @AutoConfigureMockMvc
 @EnableWebMvc
 public class IngredientControllerIntegrationTestSuite {
