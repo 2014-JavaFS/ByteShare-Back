@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FavoriteRepository extends JpaRepository<Favorite, Integer> {
+    //For getting Git Commit To Actually Post to GitHub For Merge
 
     //@Query(value ="SELECT f from favorite f where f.account_associatedid=?1", nativeQuery = true)
     //List<favorite> findByUserID(int userID);

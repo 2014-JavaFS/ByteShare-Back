@@ -30,6 +30,7 @@ public class FavoriteService {
     public List<Favorite> findAll(){
         return favoriteRepository.findAll();
     }
+    //For getting Git Commit To Actually Post to GitHub For Merge
 
     public List<Favorite> findAllWithID(int userID){
 

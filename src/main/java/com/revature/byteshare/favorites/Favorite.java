@@ -9,6 +9,7 @@ import lombok.*;
 @Entity
 @Table(name = "favorite")
 public class Favorite {
+    //For getting Git Commit To Actually Post to GitHub For Merge
 
 
     //Declaring Variables
