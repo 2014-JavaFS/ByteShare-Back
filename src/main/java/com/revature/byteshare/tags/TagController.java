@@ -1,6 +1,9 @@
 package com.revature.byteshare.tags;
 
 
+import com.revature.byteshare.recipe.Recipe;
+import com.revature.byteshare.recipe.RecipeService;
+import com.revature.byteshare.tags.dtos.TagDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,11 +14,37 @@ import java.util.List;
 public class TagController {
 
     private final TagService tagService;
+    private final RecipeService recipeService;
     //TODO will need a recipe service reference here to facilitate find recipes by tag
 
     @Autowired
-    public TagController(TagRepository tagRepository){
-        this.tagService = new TagService(tagRepository);
+    public TagController(TagService tagService, RecipeService recipeService){
+        this.tagService = tagService;
+        this.recipeService = recipeService;
+    }
+
+    private TagDTO mapToDTO(Tag tag){
+        return new TagDTO(
+                tag.getRecipe().getId(),
+                tag.getTag_name()
+        );
+    }
+    @PostMapping
+    public Tag createTag(@RequestBody TagDTO tagDTO){
+        System.out.println("\nInitial Tag being created :"+ tagDTO);
+
+        Recipe recipe = recipeService.findById(tagDTO.getRecipe_id());
+        System.out.println("Recipe that was returned from recipeService :"+ recipe);
+
+        Tag test = new Tag();
+        test.setRecipe(recipe);
+        test.setTag_name(tagDTO.getTag_name());
+
+        System.out.println("Tag That was made from the returned recipe: "+test);
+
+        Tag result = tagService.create(test);
+        System.out.println("Tag to be sent back to the client :"+result);
+        return result;
     }
 
     //TODO This is the method that will take a List of Ints from tagservice
@@ -43,10 +72,7 @@ public class TagController {
     public List<Tag> getAllTags(){
         return tagService.findAllTags();
     }
-    @PostMapping
-    public Tag createTag(@RequestBody Tag tag){
-        return tagService.create(tag);
-    }
+
     @PutMapping
     public  boolean updateTag(@RequestBody Tag tag){
         return tagService.update(tag);

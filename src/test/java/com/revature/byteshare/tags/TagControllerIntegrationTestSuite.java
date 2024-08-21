@@ -1,6 +1,10 @@
 package com.revature.byteshare.tags;
 
+import com.revature.byteshare.recipe.Recipe;
+import com.revature.byteshare.recipe.RecipeService;
+import com.revature.byteshare.tags.dtos.TagDTO;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,13 +13,16 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@SpringBootTest(classes = {TagController.class})
 @AutoConfigureMockMvc
+@EnableWebMvc
 public class TagControllerIntegrationTestSuite {
 
     @MockBean
@@ -23,20 +30,36 @@ public class TagControllerIntegrationTestSuite {
     @MockBean
     private TagService tagService;
     @MockBean
-    private TagController tagController;
+    private RecipeService recipeService;
+    //@MockBean
+    //private RecipeRepository recipeRepository;
 
+    @Autowired
+    private TagController tagController;
     @Autowired
     private MockMvc mockMvc;
 
-    private static Tag validTag0 = new Tag(1,1,"dummyTagOne");
-    private static Tag validTag1 = new Tag(2,1,"dummyTagTwo");
-    private static Tag validTag2 = new Tag(3,2,"dummyTagTwo");
-    private static Tag validTag3 = new Tag(4,2,"dummyTagThree");
+    @Mock
+    private static Recipe defaultRecipe = new Recipe();
 
-    private static String tagJson = "{\"tag_id\":1, \"recipe_id\":1,\"tag_name\":\"dummyTagOne\"}";
+    private static Tag validTag0 = new Tag(1, defaultRecipe,"dummyTagOne");
+    private static TagDTO validTagDTO = new TagDTO(1,"dummyTagOne");
+    private static String tagJson = "{\"tag_id\":1,\"recipe\":{\"id\":0},\"tag_name\":\"dummyTagOne\"}";
+    private static String tagDTOJson = "{\"recipe_id\":1,\"tag_name\":\"dummyTagOne\"}";
 
-    //TODO ngl, this is the first test I have ever written, hope it actually works when i get to testing it
-    // if you see this and have suggestions please lmk -Ethan
+
+    @Test
+    public void testPostTag() throws Exception {
+        when(tagService.create(any(Tag.class))).thenReturn(validTag0);
+        when(recipeService.findById(validTagDTO.getRecipe_id())).thenReturn(defaultRecipe);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/tags")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(tagDTOJson))
+                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.content().string(tagJson));
+    }
+
     @Test
     public void testGetFindAllTags() throws Exception {
         when(tagService.findAllTags()).thenReturn(List.of(validTag0));
@@ -63,16 +86,6 @@ public class TagControllerIntegrationTestSuite {
                 .andExpect(MockMvcResultMatchers.content().string(expectedResult));
 
     }*/
-    @Test
-    public void testCreateTag() throws Exception {
-        when(tagService.create(validTag0)).thenReturn(validTag0);
-
-        mockMvc.perform(MockMvcRequestBuilders.post("/tags")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(tagJson))
-                .andExpect(MockMvcResultMatchers.status().is(200)) //TODO need to make sure this reflects the proper status
-                .andExpect(MockMvcResultMatchers.content().string(tagJson));
-    }
 
     @Test
     public void testUpdateTag() throws Exception {

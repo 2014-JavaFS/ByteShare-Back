@@ -25,7 +25,9 @@ public class TagService {
     public List<Tag> findAllTags(){
         return tagsRepository.findAll();
     }
+
     public Tag create(Tag tagToMake){
+        System.out.println("Service Tag: "+ tagToMake);
         return tagsRepository.save(tagToMake);
     }
     public boolean delete(int tagId){
