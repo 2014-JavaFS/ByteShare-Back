@@ -38,7 +38,7 @@ public class FollowService {
     }
 
     public Follow createFollow(Follow follow) {
-        if (follow.getFollower().getUser_id() == follow.getFollowing().getUser_id())
+        if (follow.getFollower().getUserId() == follow.getFollowing().getUserId())
             throw new InvalidInputException("User cannot follow themself");
         else
             return followRepository.save(follow);

@@ -28,8 +28,8 @@ public class FollowServiceUnitTestSuite {
     @InjectMocks
     private FollowService followService;
 
-    private static User defaultFollower = new User(1, "scooby@mystery.com", "sc00byd00by", "ScoobertDoobert", "Scooby", "Doo", "auth", User.userType.USER);
-    private static User defaultFollowing = new User(2, "shaggy@mystery.com", "z01nk5!", "Chef_Rogers", "Norville", "Rogers", "auth", User.userType.USER);
+    private static User defaultFollower = new User(1, "scooby@mystery.com", "sc00byd00by", "ScoobertDoobert", "Scooby", "Doo", User.UserType.USER);
+    private static User defaultFollowing = new User(2, "shaggy@mystery.com", "z01nk5!", "Chef_Rogers", "Norville", "Rogers", User.UserType.USER);
     private static Follow validFollow = new Follow(1, defaultFollower, defaultFollowing);
 
     @Test
