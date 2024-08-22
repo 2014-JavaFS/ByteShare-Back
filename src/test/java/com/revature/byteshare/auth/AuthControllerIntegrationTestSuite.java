@@ -57,18 +57,21 @@ public class AuthControllerIntegrationTestSuite {
     private static final User user = new User(registerDto.getEmail(), "password123", registerDto.getFirstName(), registerDto.getLastName(), registerDto.getUsername(), registerDto.getUserType());
     private static final String userJSON = "{\"userId\":1,\"email\":\"test@example.com\",\"password\":\"$2a$10$VLka9Q0Kq.ktavEVLgsIduTs3XaAxdn85NKldM70TmmGHyxyM8n4W\",\"username\":\"johndoe\",\"first_name\":\"John\",\"last_name\":\"Doe\",\"userType\":\"ADMIN\"}";
     private static final String registerDtoJson = "{\"email\":\"test@example.com\",\"password\":\"password123\",\"first_name\":\"John\",\"last_name\":\"Doe\",\"username\":\"johndoe\",\"userType\":\"ADMIN\"}";
-    public void test_register_new_user_with_valid_details() throws Exception {
 
-        //when(authService.register(registerDto)).thenReturn(null);
-//        when(userService.createUser(user)).thenReturn(user);
-//        when(userService.createUser(any(User.class))).thenReturn(user);
-        mockMvc.perform(MockMvcRequestBuilders.post("/auth/register")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(registerDtoJson))
-                .andExpect(MockMvcResultMatchers.status().is(200))
-                .andExpect(MockMvcResultMatchers.content().string(userJSON));
+//    @Test
+//    public void test_register_new_user_with_valid_details() throws Exception {
+//
+//        //when(authService.register(registerDto)).thenReturn(null);
+////        when(userService.createUser(user)).thenReturn(user);
+////        when(userService.createUser(any(User.class))).thenReturn(user);
+//        mockMvc.perform(MockMvcRequestBuilders.post("/auth/register")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(registerDtoJson))
+//                .andExpect(MockMvcResultMatchers.status().is(200))
+//                .andExpect(MockMvcResultMatchers.content().string(userJSON));
+//
+//    }
 
-    }
 //    @Test
 //    public void testLogin_validCredentials_returnsToken() throws Exception {
 //        // Mock user service to return a valid user ID

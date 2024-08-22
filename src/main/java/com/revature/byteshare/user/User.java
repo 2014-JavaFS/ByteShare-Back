@@ -33,7 +33,6 @@ public class User {
     private String first_name;
     @Column(nullable = false)
     private String last_name;
-    //private String auth_token; may not need after all
     @Column(name = "user_type", columnDefinition = "varchar(10) default 'AUTHOR'")
     @Enumerated(EnumType.STRING)
     private UserType userType;
