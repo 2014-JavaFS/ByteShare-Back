@@ -1,4 +1,4 @@
-package com.revature.byteshare.ingredient_list.models;
+package com.revature.byteshare.recipe_ingredient.models;
 
 
 import com.revature.byteshare.recipe.*;
@@ -13,12 +13,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class IngredientList {
+public class RecipeIngredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String ingredientName;
+
     @ManyToOne
     private Recipe recipe;
     private double quantity;
