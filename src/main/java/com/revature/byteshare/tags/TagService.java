@@ -22,8 +22,8 @@ public class TagService {
     public List<String> findAllTagNamesByRecipe(Recipe recipe){
         return tagsRepository.findAllTagNamesByRecipe(recipe).orElseThrow(()->new DataNotFoundException("This recipe has no tags"));
     }
-    public List<Recipe> findAllRecipeByTagName(String tag_name){
-        return tagsRepository.findAllRecipesByTags(tag_name).orElseThrow(()->new DataNotFoundException("No recipes were found by that tag name"));
+    public List<Recipe> findAllRecipesByTagName(String tag_name){
+        return tagsRepository.findAllRecipesByTagNames(tag_name).orElseThrow(()->new DataNotFoundException("No recipes were found by that tag name"));
     }
     public List<Tag> findAllTags(){
         List<Tag> list = tagsRepository.findAll();
@@ -34,7 +34,7 @@ public class TagService {
     }
 
     public Tag create(Tag tagToMake){
-        if(findTagById(tagToMake.getTag_id()).isPresent()){
+        if(tagsRepository.findById(tagToMake.getTag_id()).isPresent()){
             throw new InvalidInputException("This Tag Already Exists");
         }
         return tagsRepository.save(tagToMake);

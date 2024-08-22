@@ -57,7 +57,7 @@ public class TagControllerIntegrationTestSuite {
     @Test
     public void testGetAllRecipesByTagName() throws Exception{
 
-        when(tagService.findAllRecipeByTagName(validTag0.getTag_name())).thenReturn(List.of(defaultRecipe));
+        when(tagService.findAllRecipesByTagName(validTag0.getTag_name())).thenReturn(List.of(defaultRecipe));
 
         String expectedResult = recipeJson;
 

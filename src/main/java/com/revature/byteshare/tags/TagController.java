@@ -6,7 +6,6 @@ import com.revature.byteshare.recipe.RecipeService;
 import com.revature.byteshare.tags.dtos.TagDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +33,7 @@ public class TagController {
 
     @GetMapping("/findRecipes/{tag_name}")
     public List<Recipe> getAllRecipesByTagName(@PathVariable String tag_name){
-        return tagService.findAllRecipeByTagName(tag_name);
+        return tagService.findAllRecipesByTagName(tag_name);
     }
 
     /**
