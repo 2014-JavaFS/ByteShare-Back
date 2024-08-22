@@ -1,5 +1,6 @@
 package com.revature.byteshare.tags;
 
+import com.revature.byteshare.recipe.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +16,11 @@ public class TagService {
             this.tagsRepository = tagsRepository;
     }
     // TODO: need to update the exception thrown once aspects are made
-    public List<String> findAllTagNamesByRecipeID(int id ){
-        return tagsRepository.findAllTagNamesByRecipeID(id).orElseThrow();
+    public List<String> findAllTagNamesByRecipe(Recipe recipe){
+        return tagsRepository.findAllTagNamesByRecipe(recipe).orElseThrow();
     }
     // TODO: need to update the exception thrown once aspects are made
-    public List<Integer> findAllRecipeByTagName(String tag_name){
+    public List<Recipe> findAllRecipeByTagName(String tag_name){
         return tagsRepository.findAllRecipesByTags(tag_name).orElseThrow();
     }
     public List<Tag> findAllTags(){
@@ -27,7 +28,6 @@ public class TagService {
     }
 
     public Tag create(Tag tagToMake){
-        System.out.println("Service Tag: "+ tagToMake);
         return tagsRepository.save(tagToMake);
     }
     public boolean delete(int tagId){

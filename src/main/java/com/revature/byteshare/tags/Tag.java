@@ -19,7 +19,7 @@ public class Tag {
     private int tag_id;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id") // TODO may need to update this when Recipe is finished
     private Recipe recipe;
 
     @Column(unique = true, nullable = false, columnDefinition = "varchar(12)")// 12 is entirely arbitrary lmk if it should change

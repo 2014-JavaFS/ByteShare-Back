@@ -43,10 +43,41 @@ public class TagControllerIntegrationTestSuite {
     private static Recipe defaultRecipe = new Recipe();
 
     private static Tag validTag0 = new Tag(1, defaultRecipe,"dummyTagOne");
+    private static Tag validTag1 = new Tag(1, defaultRecipe,"dummyTagTwo");
     private static TagDTO validTagDTO = new TagDTO(1,"dummyTagOne");
+
     private static String tagJson = "{\"tag_id\":1,\"recipe\":{\"id\":0},\"tag_name\":\"dummyTagOne\"}";
+    private static String tagJson1 = "{\"tag_id\":1,\"recipe\":{\"id\":0},\"tag_name\":\"dummyTagTwo\"}";
     private static String tagDTOJson = "{\"recipe_id\":1,\"tag_name\":\"dummyTagOne\"}";
 
+    private static String twoTagNamesJson = "[\"dummyTagOne\",\"dummyTagTwo\"]";
+    private static String recipeJson = "[{\"id\":0}]";
+
+
+    @Test
+    public void testGetAllRecipesByTagName() throws Exception{
+
+        when(tagService.findAllRecipeByTagName(validTag0.getTag_name())).thenReturn(List.of(defaultRecipe));
+
+        String expectedResult = recipeJson;
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/tags/findRecipes/dummyTagOne"))
+                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.content().string(expectedResult));
+    }
+
+    @Test
+    public void testFindAllTagsByRecipeId()throws Exception{
+
+        when(recipeService.findById(validTagDTO.getRecipe_id())).thenReturn(defaultRecipe);
+        when(tagService.findAllTagNamesByRecipe(defaultRecipe)).thenReturn(List.of(validTag0.getTag_name(), validTag1.getTag_name()));
+
+        String expectedResult =twoTagNamesJson;
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/tags/findTagNames/1"))
+                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.content().string(expectedResult));
+    }
 
     @Test
     public void testPostTag() throws Exception {
@@ -69,33 +100,15 @@ public class TagControllerIntegrationTestSuite {
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.content().string(expectedResult));
     }
-    //TODO will finish this test when I get back
-    /*
-    @Test
-    public void testFindAllTagsByRecipeId()throws Exception{
-        when(tagService.create(validTag0)).thenReturn(validTag0);
-        when(tagService.create(validTag1)).thenReturn(validTag1);
-        when(tagService.create(validTag2)).thenReturn(validTag2);
-        when(tagService.create(validTag3)).thenReturn(validTag3);
-
-        when(tagService.findAllTagNamesByRecipeID(1)).thenReturn({validTag0, validTag1});
-        String expectedResult ="["+tagJson+"]";
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/tags"))
-                .andExpect(MockMvcResultMatchers.status().is(200))
-                .andExpect(MockMvcResultMatchers.content().string(expectedResult));
-
-    }*/
-
     @Test
     public void testUpdateTag() throws Exception {
         when(tagService.update(validTag0)).thenReturn(true);
 
         mockMvc.perform(MockMvcRequestBuilders.put("/tags")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(tagJson))
+                        .content(tagJson1))
                 .andExpect(MockMvcResultMatchers.status().is(200))
-                .andExpect(MockMvcResultMatchers.content().string(tagJson));
+                .andExpect(MockMvcResultMatchers.content().string(tagJson1));
     }
 
     @Test
