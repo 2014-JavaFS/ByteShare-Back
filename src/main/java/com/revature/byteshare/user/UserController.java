@@ -54,9 +54,9 @@ public class UserController {
     }
 
     @PutMapping("/update-privileges")
-    private ResponseEntity<Boolean> putUpdateUserAccessLevel(@RequestHeader User.UserType userType, @RequestBody User updatedUser, @RequestHeader User.UserType newType) throws AuthenticationException {
+    private ResponseEntity<Boolean> putUpdateUserAccessLevel(@RequestHeader User.UserType userType, @RequestBody User updatedUser) throws AuthenticationException {
         if (userType == User.UserType.ADMIN) {
-            userService.updateUserAccessLevel(updatedUser, newType);
+            userService.updateUserAccessLevel(updatedUser, updatedUser.getUserType());
             return ResponseEntity.status(HttpStatus.OK).body(true);
 
         }

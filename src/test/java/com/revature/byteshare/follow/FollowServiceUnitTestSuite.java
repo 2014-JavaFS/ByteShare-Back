@@ -36,7 +36,7 @@ public class FollowServiceUnitTestSuite {
     public void testSuccessFindAllFollowing() {
         //Arrange
         List<Follow> follows = new ArrayList<>(Arrays.asList(validFollow));
-        when(mockFollowRepository.findAllByFollower(1))
+        when(mockFollowRepository.findAllByFollowerUserId(1))
                 .thenReturn(follows);
 
         //Act
@@ -49,19 +49,19 @@ public class FollowServiceUnitTestSuite {
 
     @Test
     public void testFailedFindAllFollowing() {
-        when(mockFollowRepository.findAllByFollower(anyInt()))
+        when(mockFollowRepository.findAllByFollowerUserId(anyInt()))
                 .thenReturn(List.of());
 
         assertThrows(DataNotFoundException.class,
                 () -> followService.findAllFollowing(1));
-        verify(mockFollowRepository, times(1)).findAllByFollower(1);
+        verify(mockFollowRepository, times(1)).findAllByFollowerUserId(1);
     }
 
     @Test
     public void testSuccessFindAllFollowers() {
         //Arrange
         List<Follow> follows = new ArrayList<>(Arrays.asList(validFollow));
-        when(mockFollowRepository.findAllByFollowing(2))
+        when(mockFollowRepository.findAllByFollowingUserId(2))
                 .thenReturn(follows);
 
         //Act
@@ -74,18 +74,18 @@ public class FollowServiceUnitTestSuite {
 
     @Test
     public void testFailedFindAllFollowers() {
-        when(mockFollowRepository.findAllByFollowing(anyInt()))
+        when(mockFollowRepository.findAllByFollowingUserId(anyInt()))
                 .thenReturn(List.of());
 
         assertThrows(DataNotFoundException.class,
                 () -> followService.findAllFollowers(1));
-        verify(mockFollowRepository, times(1)).findAllByFollowing(1);
+        verify(mockFollowRepository, times(1)).findAllByFollowingUserId(1);
     }
 
     @Test
     public void testExistentFindByFollowerAndFollowing() {
         //Arrange
-        when(mockFollowRepository.findByFollowerAndFollowing(1, 2))
+        when(mockFollowRepository.findByFollowerUserIdAndFollowingUserId(1, 2))
                 .thenReturn(Optional.of(validFollow));
 
         //Act
@@ -93,17 +93,17 @@ public class FollowServiceUnitTestSuite {
 
         //Assert
         assertNotNull(result);
-        verify(mockFollowRepository, times(1)).findByFollowerAndFollowing(1, 2);
+        verify(mockFollowRepository, times(1)).findByFollowerUserIdAndFollowingUserId(1, 2);
     }
 
     @Test
     public void testNonexistentFindByFollowerAndFollowing() {
-        when(mockFollowRepository.findByFollowerAndFollowing(anyInt(), anyInt()))
+        when(mockFollowRepository.findByFollowerUserIdAndFollowingUserId(anyInt(), anyInt()))
                 .thenReturn(Optional.empty());
 
         assertThrows(DataNotFoundException.class,
                 () -> followService.findByFollowerAndFollowing(2, 1));
-        verify(mockFollowRepository, times(1)).findByFollowerAndFollowing(2, 1);
+        verify(mockFollowRepository, times(1)).findByFollowerUserIdAndFollowingUserId(2, 1);
     }
 
     @Test
