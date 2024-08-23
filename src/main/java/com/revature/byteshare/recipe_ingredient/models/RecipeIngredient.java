@@ -1,7 +1,7 @@
-package com.revature.byteshare.ingredient_list.models;
+package com.revature.byteshare.recipe_ingredient.models;
 
 
-import com.revature.byteshare.recipe.Recipe;
+import com.revature.byteshare.recipe.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class IngredientList {
+public class RecipeIngredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

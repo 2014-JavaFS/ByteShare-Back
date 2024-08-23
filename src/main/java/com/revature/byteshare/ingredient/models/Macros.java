@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class Macros {
-    private int servingQuantity;
+    private double servingQuantity;
     private String servingUnit;
     private double gramsPerServing;
     private double calories;  //in kCal
