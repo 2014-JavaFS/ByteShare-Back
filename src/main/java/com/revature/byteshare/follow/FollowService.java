@@ -17,7 +17,7 @@ public class FollowService {
     }
 
     public List<Follow> findAllFollowing(int userId) {
-        List<Follow> follows = followRepository.findAllByFollower(userId);
+        List<Follow> follows = followRepository.findAllByFollowerUserId(userId);
         if (follows.isEmpty())
             throw new DataNotFoundException("User not following any users");
         else
@@ -25,7 +25,7 @@ public class FollowService {
     }
 
     public List<Follow> findAllFollowers(int userId) {
-        List<Follow> follows = followRepository.findAllByFollowing(userId);
+        List<Follow> follows = followRepository.findAllByFollowingUserId(userId);
         if (follows.isEmpty())
             throw new DataNotFoundException("User has no followers");
         else
@@ -33,12 +33,12 @@ public class FollowService {
     }
 
     public Follow findByFollowerAndFollowing(int followerId, int followingId) {
-        return followRepository.findByFollowerAndFollowing(followerId, followingId)
+        return followRepository.findByFollowerUserIdAndFollowingUserId(followerId, followingId)
                 .orElseThrow(() -> new DataNotFoundException("Current user is not following that user"));
     }
 
     public Follow createFollow(Follow follow) {
-        if (follow.getFollower().getUser_id() == follow.getFollowing().getUser_id())
+        if (follow.getFollower().getUserId() == follow.getFollowing().getUserId())
             throw new InvalidInputException("User cannot follow themself");
         else
             return followRepository.save(follow);

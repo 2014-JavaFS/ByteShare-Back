@@ -1,6 +1,7 @@
 package com.revature.byteshare.user;
 
 import com.revature.byteshare.util.exceptions.DataNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class UserService {
     }
 
     public int lookupUserIdByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow().getUser_id();
+        return userRepository.findByEmail(email).orElseThrow().getUserId();
     }
 
     public User findById(int userId){
@@ -34,13 +35,20 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
-    public User updateUser(User updatedUser) {
-
-        return userRepository.save(updatedUser);
+    @Transactional
+    public boolean updateUser(User updatedUser) {
+        userRepository.save(updatedUser);
+        return true;
     }
 
-    protected User updateUserAccessLevel(User user, User.userType userType){
-        user.setUser_type(userType);
-        return userRepository.save(user);
+    public boolean deleteUser(int userId) {
+        userRepository.deleteById(userId);
+        return true;
+    }
+
+    public boolean updateUserAccessLevel(User user, User.UserType userType){
+        user.setUserType(userType);
+        userRepository.save(user);
+        return true;
     }
 }

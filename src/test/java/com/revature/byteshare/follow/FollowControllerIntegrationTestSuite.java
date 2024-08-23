@@ -39,24 +39,24 @@ public class FollowControllerIntegrationTestSuite {
     @Autowired
     private MockMvc mockMvc;
 
-    private static User defaultFollower = new User(1, "scooby@mystery.com", "sc00byd00by", "ScoobertDoobert", "Scooby", "Doo", "auth", User.userType.USER);
-    private static String followerJSON = ("{\"user_id\":1,\"email\":\"scooby@mystery.com\",\"password\":\"sc00byd00by\",\"username\":\"ScoobertDoobert\",\"first_name\":\"Scooby\",\"last_name\":\"Doo\",\"auth_token\":\"auth\",\"user_type\":\"USER\"}");
+    private static User defaultFollower = new User(1, "scooby@mystery.com", "sc00byd00by", "ScoobertDoobert", "Scooby", "Doo", User.UserType.USER);
+    private static String followerJSON = ("{\"user_id\":1,\"email\":\"scooby@mystery.com\",\"password\":\"sc00byd00by\",\"username\":\"ScoobertDoobert\",\"first_name\":\"Scooby\",\"last_name\":\"Doo\",\"user_type\":\"USER\"}");
 
-    private static User defaultFollowing = new User(2, "shaggy@mystery.com", "z01nk5!", "Chef_Rogers", "Norville", "Rogers", "auth", User.userType.USER);
-    private static String followingJSON = ("{\"user_id\":2,\"email\":\"shaggy@mystery.com\",\"password\":\"z01nk5!\",\"username\":\"Chef_Rogers\",\"first_name\":\"Norville\",\"last_name\":\"Rogers\",\"auth_token\":\"auth\",\"user_type\":\"USER\"}");
+    private static User defaultFollowing = new User(2, "shaggy@mystery.com", "z01nk5!", "Chef_Rogers", "Norville", "Rogers", User.UserType.USER);
+    private static String followingJSON = ("{\"user_id\":2,\"email\":\"shaggy@mystery.com\",\"password\":\"z01nk5!\",\"username\":\"Chef_Rogers\",\"first_name\":\"Norville\",\"last_name\":\"Rogers\",\"user_type\":\"USER\"}");
 
     private static Follow defaultFollow = new Follow(1, defaultFollower, defaultFollowing);
     private static String followJSON = "{\"follow_id\":1,\"follower\":" + followerJSON + ",\"following\":" + followingJSON + "}";
 
     @Test
     public void testGetFollowing() throws Exception {
-        when(followService.findAllFollowing(defaultFollower.getUser_id()))
+        when(followService.findAllFollowing(defaultFollower.getUserId()))
                 .thenReturn(List.of(defaultFollow));
 
         String expectedResult = "[" + followJSON + "]";
 
         mockMvc.perform(MockMvcRequestBuilders.get("/follow/following")
-                        .header("currentUserId", defaultFollower.getUser_id())
+                        .header("currentUserId", defaultFollower.getUserId())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.content().string(expectedResult));
@@ -64,13 +64,13 @@ public class FollowControllerIntegrationTestSuite {
 
     @Test
     public void testGetFollowers() throws Exception {
-        when(followService.findAllFollowers(defaultFollowing.getUser_id()))
+        when(followService.findAllFollowers(defaultFollowing.getUserId()))
                 .thenReturn(List.of(defaultFollow));
 
         String expectedResult = "[" + followJSON + "]";
 
         mockMvc.perform(MockMvcRequestBuilders.get("/follow/followers")
-                        .header("currentUserId", defaultFollowing.getUser_id())
+                        .header("currentUserId", defaultFollowing.getUserId())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.content().string(expectedResult));
@@ -78,13 +78,13 @@ public class FollowControllerIntegrationTestSuite {
 
     @Test
     public void testGetFollowingOfUser() throws Exception {
-        when(followService.findAllFollowing(defaultFollower.getUser_id()))
+        when(followService.findAllFollowing(defaultFollower.getUserId()))
                 .thenReturn(List.of(defaultFollow));
 
         String expectedResult = "[" + followJSON + "]";
 
         mockMvc.perform(MockMvcRequestBuilders.get("/follow/following/user?userId="
-                                + defaultFollower.getUser_id())
+                                + defaultFollower.getUserId())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.content().string(expectedResult));
@@ -92,13 +92,13 @@ public class FollowControllerIntegrationTestSuite {
 
     @Test
     public void testGetFollowersOfUser() throws Exception {
-        when(followService.findAllFollowers(defaultFollowing.getUser_id()))
+        when(followService.findAllFollowers(defaultFollowing.getUserId()))
                 .thenReturn(List.of(defaultFollow));
 
         String expectedResult = "[" + followJSON + "]";
 
         mockMvc.perform(MockMvcRequestBuilders.get("/follow/followers/user?userId="
-                                + defaultFollowing.getUser_id())
+                                + defaultFollowing.getUserId())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.content().string(expectedResult));
@@ -107,14 +107,14 @@ public class FollowControllerIntegrationTestSuite {
     @Test
     public void testPostFollow() throws Exception {
         when(followService.createFollow(any(Follow.class))).thenReturn(defaultFollow);
-        when(userService.findByUserIdNumber(defaultFollower.getUser_id())).thenReturn(defaultFollower);
-        when(userService.findByUserIdNumber(defaultFollowing.getUser_id())).thenReturn(defaultFollowing);
+        when(userService.findByUserIdNumber(defaultFollower.getUserId())).thenReturn(defaultFollower);
+        when(userService.findByUserIdNumber(defaultFollowing.getUserId())).thenReturn(defaultFollowing);
 
         String expectedResult = followJSON;
 
         mockMvc.perform(MockMvcRequestBuilders.post("/follow?followingId="
-                                + defaultFollowing.getUser_id())
-                        .header("currentUserId", defaultFollower.getUser_id())
+                                + defaultFollowing.getUserId())
+                        .header("currentUserId", defaultFollower.getUserId())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(HttpStatus.CREATED.value()))
                 .andExpect(MockMvcResultMatchers.content().string(expectedResult));
@@ -126,8 +126,8 @@ public class FollowControllerIntegrationTestSuite {
                 .thenReturn(true);
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/follow?followingId="
-                                + defaultFollowing.getUser_id())
-                        .header("currentUserId", defaultFollower.getUser_id())
+                                + defaultFollowing.getUserId())
+                        .header("currentUserId", defaultFollower.getUserId())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(HttpStatus.NO_CONTENT.value()));
     }

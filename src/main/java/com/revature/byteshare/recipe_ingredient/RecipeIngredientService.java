@@ -47,7 +47,7 @@ public class RecipeIngredientService {
         return repository.findById(id).orElseThrow(() -> new DataNotFoundException("Ingredient not found at this id"));
     }
     public List<RecipeIngredient>findAllIngredientsByRecipeId(int recipeId){
-        return repository.findByRecipeId(recipeId);
+        return repository.findByRecipeRecipeId(recipeId);
     }
     public void delete(int id){
         repository.deleteById(id);

@@ -1,7 +1,7 @@
 package com.revature.byteshare.userfeedback;
 
-import com.revature.byteshare.recipe.Recipe;
 import com.revature.byteshare.user.User;
+import com.revature.byteshare.recipe.Recipe;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
