@@ -1,5 +1,6 @@
 package com.revature.byteshare.Vote;
 
+import com.revature.byteshare.userfeedback.UserFeedback;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,10 +19,13 @@ public class Vote {
     @Id
     @GeneratedValue
     private int vote_id;
+
     @ManyToOne
     private User voter;
+
     @ManyToOne
-    private Recipe recipe;      // Post or Recipe?
+    private UserFeedback userFeedback;
+
     private boolean isUpvote;
 }
 

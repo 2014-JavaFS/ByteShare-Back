@@ -1,7 +1,7 @@
-package com.revature.byteshare.tags;
+package com.revature.byteshare.tags.models;
 
 import com.revature.byteshare.recipe.Recipe;
-import com.revature.byteshare.tags.dtos.TagDTO;
+import com.revature.byteshare.tags.models.TagDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

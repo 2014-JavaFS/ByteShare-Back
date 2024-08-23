@@ -40,10 +40,9 @@ public class VoteController {
         return ResponseEntity.ok(voteService.update(updatedVote));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     private ResponseEntity<Boolean> deleteVote(@PathVariable int id) {
         return ResponseEntity.ok(voteService.delete(id));
     }
-
 
 }

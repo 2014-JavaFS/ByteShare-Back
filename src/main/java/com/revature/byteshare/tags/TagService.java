@@ -1,6 +1,7 @@
 package com.revature.byteshare.tags;
 
 import com.revature.byteshare.recipe.Recipe;
+import com.revature.byteshare.tags.models.Tag;
 import com.revature.byteshare.util.exceptions.DataNotFoundException;
 import com.revature.byteshare.util.exceptions.InvalidInputException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class TagService {
 
     @Autowired
     public TagService(TagRepository tagsRepository){
-            this.tagsRepository = tagsRepository;
+        this.tagsRepository = tagsRepository;
     }
     public List<String> findAllTagNamesByRecipe(Recipe recipe){
         return tagsRepository.findAllTagNamesByRecipe(recipe).orElseThrow(()->new DataNotFoundException("This recipe has no tags"));

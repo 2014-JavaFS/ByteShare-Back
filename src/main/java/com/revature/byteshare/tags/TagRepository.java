@@ -1,6 +1,7 @@
 package com.revature.byteshare.tags;
 
 import com.revature.byteshare.recipe.Recipe;
+import com.revature.byteshare.tags.models.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -3,7 +3,8 @@ package com.revature.byteshare.tags;
 
 import com.revature.byteshare.recipe.Recipe;
 import com.revature.byteshare.recipe.RecipeService;
-import com.revature.byteshare.tags.dtos.TagDTO;
+import com.revature.byteshare.tags.models.Tag;
+import com.revature.byteshare.tags.models.TagDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

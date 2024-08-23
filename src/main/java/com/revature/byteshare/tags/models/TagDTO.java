@@ -1,4 +1,4 @@
-package com.revature.byteshare.tags.dtos;
+package com.revature.byteshare.tags.models;
 
 import lombok.*;
 
