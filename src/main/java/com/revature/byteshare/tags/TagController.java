@@ -1,12 +1,7 @@
 package com.revature.byteshare.tags;
 
 
-import com.revature.byteshare.recipe.Recipe;
-import com.revature.byteshare.recipe.RecipeService;
-import com.revature.byteshare.tags.dtos.TagDTO;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,63 +11,49 @@ import java.util.List;
 public class TagController {
 
     private final TagService tagService;
-    private final RecipeService recipeService;
+    //TODO will need a recipe service reference here to facilitate find recipes by tag
 
     @Autowired
-    public TagController(TagService tagService, RecipeService recipeService){
-        this.tagService = tagService;
-        this.recipeService = recipeService;
-    }
-    //have this here just in case, may not end needing this
-    private TagDTO mapToDTO(Tag tag){
-        return new TagDTO(
-                tag.getRecipe().getId(),
-                tag.getTag_name()
-        );
+    public TagController(TagRepository tagRepository){
+        this.tagService = new TagService(tagRepository);
     }
 
-    @GetMapping("/findRecipes/{tag_name}")
+    //TODO This is the method that will take a List of Ints from tagservice
+    // and use it to make a list of recipes from recipe service. Will implement ASAP
+    /*
+    @GetMapping("/{tag_name}") // possibly use query param? not entirely sure when to use one over the other tbh
     public List<Recipe> getAllRecipesByTagName(@PathVariable String tag_name){
-        return tagService.findAllRecipesByTagName(tag_name);
+        return
     }
+     */
 
-    /**
+    // TODO : FOR REVIEWER: do we actually just want this to return a list
+    //  of Tag_names or do we want it returning the whole tag object?
+    /*
      * This method is used when displaying a recipe. It will return all Tag
      * Names associated with this recipe id.
      * @param recipeId
      * @return A list of Tag Names (Strings)
      */
-    @GetMapping("/findTagNames/{recipeId}")
-    public List<String> getAllTagNamesByRecipeId(@PathVariable int recipeId){
-        Recipe recipe = recipeService.findById(recipeId);
-
-        return tagService.findAllTagNamesByRecipe(recipe);
-    }
-    @PostMapping
-    public Tag createTag(@RequestBody TagDTO tagDTO){
-
-        Recipe recipe = recipeService.findById(tagDTO.getRecipe_id());
-
-        Tag test = new Tag();
-        test.setRecipe(recipe);
-        test.setTag_name(tagDTO.getTag_name());
-
-        return  tagService.create(test);
-    }
+//    @GetMapping("/{recipeId}")
+//    public List<String> getAllTagsByRecipeId(@PathVariable int recipeId){
+//        return tagService.findAllTagNamesByRecipeID(recipeId);
+//    }
     @GetMapping
     public List<Tag> getAllTags(){
         return tagService.findAllTags();
     }
-
+    @PostMapping
+    public Tag createTag(@RequestBody Tag tag){
+        return tagService.create(tag);
+    }
     @PutMapping
-    public  ResponseEntity<Tag> updateTag(@Valid @RequestBody Tag tag){
-        tagService.update(tag);
-        return ResponseEntity.ok(tag);
+    public  boolean updateTag(@RequestBody Tag tag){
+        return tagService.update(tag);
     }
     @DeleteMapping("/{tagId}")
-    public ResponseEntity<Void> deleteTag(@PathVariable int tagId){
-        tagService.delete(tagId);
-        return ResponseEntity.noContent().build();
+    public boolean deleteTag(@PathVariable int tagId){
+        return tagService.delete(tagId);
     }
 
 }
