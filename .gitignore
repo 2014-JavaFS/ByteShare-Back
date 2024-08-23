@@ -1,12 +1,9 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-mvnw
-mvnw.cmd
+### IntelliJ IDEA ###
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
 
-### STS ###
+### Eclipse ###
 .apt_generated
 .classpath
 .factorypath
@@ -14,12 +11,10 @@ mvnw.cmd
 .settings
 .springBeans
 .sts4-cache
-
-### IntelliJ IDEA ###
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
 .idea
-*.iws
-*.iml
-*.ipr
 
 ### NetBeans ###
 /nbproject/private/
@@ -27,12 +22,13 @@ mvnw.cmd
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+*.iml
 
 ### VS Code ###
 .vscode/
 
-### Application Properties ###
-/src/main/resources/application.properties
+### Mac OS ###
+.DS_Store
+
+target/
+*log
