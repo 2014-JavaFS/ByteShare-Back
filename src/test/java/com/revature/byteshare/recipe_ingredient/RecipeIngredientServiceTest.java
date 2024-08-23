@@ -1,7 +1,6 @@
 package com.revature.byteshare.recipe_ingredient;
 
 
-import com.revature.byteshare.recipe.Recipe;
 import com.revature.byteshare.recipe.RecipeRepository;
 import com.revature.byteshare.recipe_ingredient.models.RecipeIngredient;
 import com.revature.byteshare.recipe_ingredient.models.RecipeIngredientDto;

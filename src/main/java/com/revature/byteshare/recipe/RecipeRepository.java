@@ -7,5 +7,6 @@ import java.util.List;
 
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
-    List<Recipe> findAllByUserUserId(int userId);
+    List<Recipe> findAllByAuthorUserId(int userId);
 }
+
