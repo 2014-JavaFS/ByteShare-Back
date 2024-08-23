@@ -8,6 +8,7 @@ pipeline{
         // Global Variables from Jenkins
         dockerHub = credentials('dockerHub')
         DBPASS = credentials('DBPASS')
+        APIKEY = credentials('APIKEY')
 
         // Custom Variables for this Jenkinsfile only
         SERVICE = "byteshare-back" // #CHECK CONFIG
@@ -47,7 +48,7 @@ pipeline{
             steps{
             // docker run, but we've add the -e flag to pass the environment variable defined in Jenkins to the our Docker Container
             // so our application.yml has context for what's there
-                sh "docker run --name ${CONTAINER} -e DBPASS=${DBPASS} -d -p 8888:9999 ${IMAGE}" // #CHECK CONFIG ports
+                sh "docker run --name ${CONTAINER} -e DBPASS=${DBPASS} -e APIKEY=${APIKEY} -d -p 8888:9999 ${IMAGE}" // #CHECK CONFIG ports
             }
 
         }
