@@ -18,7 +18,6 @@ public class TagService {
     public TagService(TagRepository tagsRepository){
             this.tagsRepository = tagsRepository;
     }
-
     public List<String> findAllTagNamesByRecipe(Recipe recipe){
         return tagsRepository.findAllTagNamesByRecipe(recipe).orElseThrow(()->new DataNotFoundException("This recipe has no tags"));
     }

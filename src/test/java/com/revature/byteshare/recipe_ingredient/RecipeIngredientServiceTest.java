@@ -38,7 +38,7 @@ public class RecipeIngredientServiceTest {
     @Test
     void testCreateIngredient() {
         Recipe recipe = new Recipe();
-        recipe.setId(1);
+        recipe.setRecipeId(1);
 
         RecipeIngredientDto dto = RecipeIngredientDto.builder()
                 .ingredient("Sugar")
@@ -54,7 +54,7 @@ public class RecipeIngredientServiceTest {
 
         assertNotNull(result);
         assertEquals(dto.getIngredient(), result.getIngredientName());
-        assertEquals(dto.getRecipeId(), result.getRecipe().getId());
+        assertEquals(dto.getRecipeId(), result.getRecipe().getRecipeId());
         assertEquals(dto.getQuantity(), result.getQuantity());
         assertEquals(dto.getUnit(), result.getUnit());
 
@@ -64,7 +64,7 @@ public class RecipeIngredientServiceTest {
     @Test
     void testUpdateIngredient() {
         Recipe recipe = new Recipe();
-        recipe.setId(1);
+        recipe.setRecipeId(1);
 
         RecipeIngredient existingIngredient = RecipeIngredient.builder()
                 .id(1)
@@ -89,7 +89,7 @@ public class RecipeIngredientServiceTest {
 
         assertNotNull(result);
         assertEquals(dto.getIngredient(), result.getIngredientName());
-        assertEquals(dto.getRecipeId(), result.getRecipe().getId());
+        assertEquals(dto.getRecipeId(), result.getRecipe().getRecipeId());
         assertEquals(dto.getQuantity(), result.getQuantity());
         assertEquals(dto.getUnit(), result.getUnit());
 
@@ -118,7 +118,7 @@ public class RecipeIngredientServiceTest {
         RecipeIngredient ingredient2 = new RecipeIngredient();
         ingredient2.setId(2);
 
-        when(recipeIngredientRepository.findByRecipeId(anyInt())).thenReturn(Arrays.asList(ingredient1, ingredient2));
+        when(recipeIngredientRepository.findByRecipeRecipeId(anyInt())).thenReturn(Arrays.asList(ingredient1, ingredient2));
 
         List<RecipeIngredient> result = recipeIngredientService.findAllIngredientsByRecipeId(1);
 
@@ -127,7 +127,7 @@ public class RecipeIngredientServiceTest {
         assertEquals(1, result.get(0).getId());
         assertEquals(2, result.get(1).getId());
 
-        verify(recipeIngredientRepository, times(1)).findByRecipeId(1);
+        verify(recipeIngredientRepository, times(1)).findByRecipeRecipeId(1);
     }
 
 }
