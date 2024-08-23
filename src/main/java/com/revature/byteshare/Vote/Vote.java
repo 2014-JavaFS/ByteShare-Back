@@ -22,7 +22,7 @@ public class Vote {
     @GeneratedValue
     private int vote_id;
     private User voter;
-    private Recipe recipe;      // Post or Recipe?
+    private Recipe recipe;
     private boolean isUpvote;
 }
 
