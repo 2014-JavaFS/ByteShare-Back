@@ -11,4 +11,7 @@ spring:
         ddl-auto: update
     show-sql: true
 server:
-  port: 9999 #CHECK CONFIG
+  port: 9999
+nutritionix:
+  app-id: 05e638d6
+  app-key: 1c4f13909ff79b8a7ab3a975d8940b22
