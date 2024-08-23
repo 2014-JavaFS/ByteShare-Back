@@ -1,8 +1,7 @@
 package com.revature.byteshare.ingredient_list.models;
 
 
-import com.revature.byteshare.ingredient.models.Ingredient;
-import com.revature.byteshare.Recipe.Recipe;
+import com.revature.byteshare.recipe.Recipe;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

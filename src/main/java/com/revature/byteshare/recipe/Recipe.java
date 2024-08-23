@@ -1,4 +1,4 @@
-package com.revature.byteshare.Recipe;
+package com.revature.byteshare.recipe;
 
 import com.revature.byteshare.User.User;
 import jakarta.persistence.*;
