@@ -1,6 +1,5 @@
 package com.revature.byteshare.tags;
 
-import com.revature.byteshare.recipe.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,10 +10,11 @@ import java.util.Optional;
 
 @Repository
 public interface TagRepository extends JpaRepository<Tag, Integer> {
+    //TODO may need to be changes based on the 'recipe_id' name, test this
+    //@Query("from tags t where t.recipe.recipe_id = :recipe_id")
+    //Optional<List<String>> findAllTagNamesByRecipeID(@Param("recipe_id") int recipe_id);
 
-    @Query("select t.tag_name from tags t where t.recipe = :recipe")
-    Optional<List<String>> findAllTagNamesByRecipe(@Param("recipe") Recipe recipe);
-
-    @Query("select t.recipe from tags t where t.tag_name = :tag_name")
-    Optional<List<Recipe>> findAllRecipesByTagNames(@Param("tag_name") String tag_name);
+    //TODO need to test this, make sure query is spelled properly when all tables are made
+    //@Query("from tags t where t.tag_name = :tag_name")
+    //Optional<List<Integer>> findAllRecipesByTags(@Param("tag_name") String tag_name);
 }
