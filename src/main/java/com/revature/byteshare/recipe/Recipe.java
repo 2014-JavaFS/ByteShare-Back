@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 
 @Entity
@@ -30,4 +31,7 @@ public class Recipe {
     private String content; //either blob or text in SQL
     private int prepTime; // in minutes
     private int cookTime; // in minutes
+
+    public Recipe(int id, User defaultUser, Time now, String thisIsARecipe, int prepTime, int cookTime) {
+    }
 }
