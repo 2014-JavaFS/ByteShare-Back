@@ -37,7 +37,7 @@ public class FavoriteService {
         List<Favorite> temp =findAll();
         List<Favorite> buisnessLogicList = new ArrayList<>();
         for(int i=0; i<temp.size();i++){
-            if(temp.get(i).getAccountAssociatedID() == userID) {
+            if(temp.get(i).getAccountAssociatedID().getUserId() == userID) {
                 buisnessLogicList.add(temp.get(i));
             }
         }
@@ -49,10 +49,10 @@ public class FavoriteService {
 
         List<Favorite> temp =favoriteRepository.findAll();
         for(int i=0; i<temp.size();i++){
-            if(temp.get(i).getRecipeToSave() == recipeID) {
+            if(temp.get(i).getRecipeToSave().getRecipeId() == recipeID) {
                 favoriteRepository.delete(temp.get(i));
                 return true;
-                }
+            }
         }
 
         return false;
