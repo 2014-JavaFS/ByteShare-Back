@@ -18,7 +18,7 @@ public class Tag {
     private int tag_id;
 
     @ManyToOne
-    @JoinColumn(name = "recipe_Id", nullable = false) //TODO make sure this is the correct column string
+    @JoinColumn(name = "recipe_id", nullable = false) //TODO make sure this is the correct column string
     private Recipe recipe;
 
     @Column(unique = true, nullable = false, columnDefinition = "varchar(12)")// 12 is entirely arbitrary lmk if it should change
