@@ -1,4 +1,4 @@
-package com.revature.byteshare.Recipe;
+package com.revature.byteshare.recipe;
 
 import com.revature.byteshare.util.exceptions.DataNotFoundException;
 import jakarta.transaction.Transactional;
@@ -50,7 +50,7 @@ public class RecipeService {
     }
 
     public List<Recipe> findAllById(int userId) {
-        List<Recipe> recipes = recipeRepository.findAllByUserUserId(userId);
+        List<Recipe> recipes = recipeRepository.findAllByAuthorUserId(userId);
         if (recipes.isEmpty()){
             throw new DataNotFoundException("No recipes with that userId was found");
         } else {

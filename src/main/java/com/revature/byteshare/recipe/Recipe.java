@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int recipeId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
