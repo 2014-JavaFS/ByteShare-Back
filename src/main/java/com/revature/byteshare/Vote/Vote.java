@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import com.revature.byteshare.recipe.Recipe;
 import com.revature.byteshare.user.User;
 
 @Data

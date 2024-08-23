@@ -1,7 +1,5 @@
 package com.revature.byteshare.tags;
 
-import com.revature.byteshare.Vote.Vote;
-import com.revature.byteshare.recipe.Recipe;
 import com.revature.byteshare.tags.models.Tag;
 import com.revature.byteshare.util.exceptions.DataNotFoundException;
 import com.revature.byteshare.util.exceptions.InvalidInputException;
@@ -9,9 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 
 import java.util.List;
 import java.util.Optional;
