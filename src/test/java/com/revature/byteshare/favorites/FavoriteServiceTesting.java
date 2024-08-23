@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
+import com.revature.byteshare.recipe.Recipe;
+import com.revature.byteshare.user.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -26,10 +28,19 @@ public class FavoriteServiceTesting {
     @Test
     public void testGetByUserID(){
         Favorite temp = new Favorite();
+        User tempUser = new User("Jacob@TestFavs.com","PasswordTest",
+                "Testman","McTestserman","TestUserName",
+                User.UserType.AUTHOR);
+        tempUser.setUserId(1);
+
+        Recipe tempRecipe = new Recipe();
+        tempRecipe.setRecipeId(3)
+        ;
         temp.setFavoriteSerialID(3);
-        temp.setAccountAssociatedID(1);
-        temp.setRecipeToSave(1);
-        Favorite temp2= new Favorite(1,1,3);
+        temp.setAccountAssociatedID(tempUser);
+        temp.setRecipeToSave(tempRecipe);
+
+        Favorite temp2= new Favorite(1,tempUser,tempRecipe);
 
         List<Favorite> toCheck = new ArrayList<>();
         toCheck.add(temp);
@@ -45,7 +56,13 @@ public class FavoriteServiceTesting {
 
     @Test
     public void testCreate(){
-        Favorite temp2= new Favorite(1,1,3);
+        User tempUser = new User("Jacob@TestFavs.com","PasswordTest",
+                "Testman","McTestserman","TestUserName",
+                User.UserType.AUTHOR);
+
+        Recipe tempRecipe = new Recipe();
+        tempRecipe.setRecipeId(3);
+        Favorite temp2= new Favorite(1,tempUser,tempRecipe);
         when(testingService.create(temp2)).thenReturn(temp2);
 
         Favorite check = testingService.create(temp2);
@@ -57,7 +74,13 @@ public class FavoriteServiceTesting {
     @Test
     public void testDelete(){
         //@TODO Implement whenever/If we switch from back end filtering to custom Query filtering
-        Favorite temp2= new Favorite(1,1,3);
+        User tempUser = new User("Jacob@TestFavs.com","PasswordTest",
+                "Testman","McTestserman","TestUserName",
+                User.UserType.AUTHOR);
+
+        Recipe tempRecipe = new Recipe();
+        tempRecipe.setRecipeId(3);
+        Favorite temp2= new Favorite(1,tempUser,tempRecipe);
         //when(testingService.removeFavorite(1,3)).thenReturn(true);
         List<Favorite> forMocking = new ArrayList<>();
         doReturn(forMocking).when(testingRepository).findAll();

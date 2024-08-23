@@ -21,11 +21,11 @@ public class Favorite {
     private int favoriteSerialID;
     //TODO Check That These names and References are Correct
     @ManyToOne
-    @JoinColumn(name = "accountAssociatedID", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "accountAssociatedID", referencedColumnName = "userId", nullable = false)
     private User accountAssociatedID;
     //TODO Check That These names and References are Correct
     @ManyToOne
-    @JoinColumn(name = "accountAssociatedID", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "recipeToSave", referencedColumnName = "recipeId", nullable = false)
     private Recipe recipeToSave;
 
 

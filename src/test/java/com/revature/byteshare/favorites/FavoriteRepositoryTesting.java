@@ -1,5 +1,7 @@
 package com.revature.byteshare.favorites;
 
+import com.revature.byteshare.recipe.Recipe;
+import com.revature.byteshare.user.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -24,15 +26,23 @@ public class FavoriteRepositoryTesting {
 
     @Test
     public void testSaving(){
-        Favorite tempFavorite = new Favorite(1,2,3);
-        Favorite toCheck = new Favorite();
+
+        User tempUser = new User("Jacob@TestFavs.com","PasswordTest",
+                "Testman","McTestserman","TestUserName",
+                User.UserType.AUTHOR);
+
+        Recipe tempRecipe = new Recipe();
+        tempRecipe.setRecipeId(3);
+
+        Favorite tempFavorite = new Favorite(1,tempUser,tempRecipe);
+        Favorite toCheck;
         toCheck=repository.save(tempFavorite);
         assertNotNull(toCheck);
         assertEquals(toCheck.getFavoriteSerialID(), tempFavorite.getFavoriteSerialID());
         List<Favorite> getting = repository.findAll();
         toCheck=null;
         for(int i=0;i<getting.size();i++){
-            if(getting.get(i).getAccountAssociatedID()==2 && getting.get(i).getRecipeToSave()==3)
+            if(getting.get(i).getAccountAssociatedID().getUserId()==2 && getting.get(i).getRecipeToSave().getRecipeId()==3)
                 toCheck=getting.get(i);
         }
         assertNotNull(toCheck);
@@ -42,8 +52,15 @@ public class FavoriteRepositoryTesting {
     @Test
     public void testDeleting(){
 
+        User tempUser = new User("Jacob@TestFavs.com","PasswordTest",
+                "Testman","McTestserman","TestUserName",
+                User.UserType.AUTHOR);
+
+        Recipe tempRecipe = new Recipe();
+        tempRecipe.setRecipeId(3);
+
         assertEquals( 0,repository.count());
-        Favorite tempFavorite = new Favorite(1,2,3);
+        Favorite tempFavorite = new Favorite(1,tempUser,tempRecipe);
         repository.save(tempFavorite);
         assertEquals( 1,repository.count());
         repository.delete(tempFavorite);
