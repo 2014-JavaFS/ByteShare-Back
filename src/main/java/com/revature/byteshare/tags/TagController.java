@@ -26,7 +26,7 @@ public class TagController {
     //have this here just in case, may not end needing this
     private TagDTO mapToDTO(Tag tag){
         return new TagDTO(
-                tag.getRecipe().getId(),
+                tag.getRecipe().getRecipeId(),
                 tag.getTag_name()
         );
     }

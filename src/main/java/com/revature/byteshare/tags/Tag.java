@@ -12,14 +12,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 @Entity
-@Table(name ="tags")
+//@Table(name ="Tag") dont actually need this
 public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int tag_id;
 
     @ManyToOne
-    @JoinColumn(name = "recipe_id", nullable = false) 
+    @JoinColumn(name ="recipe")
     private Recipe recipe;
 
     @Column(unique = true, nullable = false, columnDefinition = "varchar(12)")// 12 is entirely arbitrary lmk if it should change
