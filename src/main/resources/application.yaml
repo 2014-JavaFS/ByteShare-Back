@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://byteshare-db.cpu6mwoomoe6.us-east-2.rds.amazonaws.com:5432/postgres
+    username: postgres #CHECK CONFIG
+    password: ${DBPASS}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: update
+    show-sql: true
+server:
+  port: 9999 #CHECK CONFIG
