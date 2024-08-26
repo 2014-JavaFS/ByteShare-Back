@@ -9,6 +9,8 @@ WORKDIR app/
 # Always pair this with a docker ignore file
 COPY . .
 
+RUN chmod +x mvnw
+
 ENV PORT=8080
 
 ENTRYPOINT ["./mvnw", "spring-boot:run"]

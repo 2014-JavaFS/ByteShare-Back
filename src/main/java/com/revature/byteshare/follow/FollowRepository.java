@@ -8,9 +8,15 @@ import java.util.Optional;
 
 @Repository
 public interface FollowRepository extends JpaRepository<Follow, Integer> {
-    List<Follow> findAllByFollower(int userId);
+    List<Follow> findAllByFollowerUserId(int userId);
 
-    List<Follow> findAllByFollowing(int userId);
+    List<Follow> findAllByFollowingUserId(int userId);
 
-    Optional<Follow> findByFollowerAndFollowing(int follower, int following);
+    /**
+     * Name of class attribute followed by UserId from the User object
+     * @param follower
+     * @param following
+     * @return
+     */
+    Optional<Follow> findByFollowerUserIdAndFollowingUserId(int follower, int following);
 }

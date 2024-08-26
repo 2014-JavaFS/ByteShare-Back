@@ -1,14 +1,11 @@
 package com.revature.byteshare.Vote;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.revature.byteshare.userfeedback.UserFeedback;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import com.revature.byteshare.recipe.Recipe;
 import com.revature.byteshare.user.User;
 
 @Data
@@ -21,8 +18,13 @@ public class Vote {
     @Id
     @GeneratedValue
     private int vote_id;
+
+    @ManyToOne
     private User voter;
-    private Recipe recipe;      // Post or Recipe?
+
+    @ManyToOne
+    private UserFeedback userFeedback;
+
     private boolean isUpvote;
 }
 
