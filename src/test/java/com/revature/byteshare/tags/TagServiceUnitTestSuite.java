@@ -1,5 +1,6 @@
 package com.revature.byteshare.tags;
 
+import com.revature.byteshare.recipe.Recipe;
 import com.revature.byteshare.tags.models.Tag;
 import com.revature.byteshare.util.exceptions.DataNotFoundException;
 import com.revature.byteshare.util.exceptions.InvalidInputException;
