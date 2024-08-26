@@ -1,5 +1,6 @@
 package com.revature.byteshare.tags;
 
+import com.revature.byteshare.recipe.Recipe;
 import com.revature.byteshare.recipe.RecipeService;
 import com.revature.byteshare.tags.models.TagDTO;
 import com.revature.byteshare.tags.models.Tag;
