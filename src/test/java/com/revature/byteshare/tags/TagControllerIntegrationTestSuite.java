@@ -70,7 +70,7 @@ public class TagControllerIntegrationTestSuite {
     @Test
     public void testFindAllTagsByRecipeId()throws Exception{
 
-        when(recipeService.findById(validTagDTO.getRecipe_id())).thenReturn(defaultRecipe);
+        when(recipeService.findById(validTagDTO.getRecipeId())).thenReturn(defaultRecipe);
         when(tagService.findAllTagNamesByRecipe(defaultRecipe)).thenReturn(List.of(validTag0.getTag_name(), validTag1.getTag_name()));
 
         String expectedResult =twoTagNamesJson;
@@ -83,7 +83,7 @@ public class TagControllerIntegrationTestSuite {
     @Test
     public void testPostTag() throws Exception {
         when(tagService.create(any(Tag.class))).thenReturn(validTag0);
-        when(recipeService.findById(validTagDTO.getRecipe_id())).thenReturn(defaultRecipe);
+        when(recipeService.findById(validTagDTO.getRecipeId())).thenReturn(defaultRecipe);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/tags")
                         .contentType(MediaType.APPLICATION_JSON)
