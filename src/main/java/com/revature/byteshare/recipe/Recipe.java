@@ -3,35 +3,39 @@ package com.revature.byteshare.recipe;
 import com.revature.byteshare.User.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 
-@Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@AllArgsConstructor
+
+@Entity
+@Table(name="recipes")
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int recipeId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User author;
+    @JoinColumn(name = "author")
+    //TODO: Get User implementation once it is available, empty file currently
+    private User user;
 
-    @Column(name = "timestamp", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Timestamp date;
+    @Column(name = "date_posted", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Timestamp datePosted;
 
-    // TODO: Spring annotations for these fields
-    private String content; //either blob or text in SQL
-    private int prepTime; // in minutes
-    private int cookTime; // in minutes
+    //TODO: Spring annotations for content in Recipe.java; double check this later
+    @Column(name = "content", columnDefinition = "BLOB")
+    private String content;
 
-    public Recipe(int id, User defaultUser, Time now, String thisIsARecipe, int prepTime, int cookTime) {
-    }
+    //TODO: double check these annotations
+    @Column(name = "prep_time", columnDefinition = "INTEGER")
+    private int prepTime;
+
+    //TODO: double check these annotations
+    @Column(name = "cook_time", columnDefinition = "INTEGER")
+    private int cookTime;
 }
