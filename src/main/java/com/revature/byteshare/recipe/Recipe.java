@@ -21,9 +21,9 @@ public class Recipe {
     private int recipeId;
 
     @ManyToOne
-    @JoinColumn(name = "author")
+    @JoinColumn(name = "user_id")
     //TODO: Get User implementation once it is available, empty file currently
-    private User user;
+    private User author;
 
     @Column(name = "date_posted", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp datePosted;
