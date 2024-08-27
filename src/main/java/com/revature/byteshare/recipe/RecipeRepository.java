@@ -12,7 +12,5 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     Recipe findByTitle(String title);
 
     Recipe findByAuthorUserId(int authorId);
-
-    Recipe findByAuthor(String author);
 }
 

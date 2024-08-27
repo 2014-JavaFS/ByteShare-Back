@@ -22,14 +22,8 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int recipeId;
 
-    @Column(name = "name", columnDefinition = "VARCHAR(100)")
-    private String name;
-
-    @OneToMany(mappedBy = "recipe")
-    private List<Ingredient> ingredients;
-
-    @Column(name = "instructions", columnDefinition = "VARCHAR(5000)")
-    private String instructions;
+    @Column(name = "title", columnDefinition = "VARCHAR(100)")
+    private String title;
 
     @ManyToOne
     @JoinColumn(name = "author")

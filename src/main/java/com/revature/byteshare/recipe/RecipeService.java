@@ -78,13 +78,4 @@ public class RecipeService {
             return recipe;
         }
     }
-
-    public Recipe findByAuthor(String author) {
-        Recipe recipe = recipeRepository.findByAuthor(author);
-        if (recipe == null){
-            throw new DataNotFoundException("No recipe with the author of " + author);
-        } else {
-            return recipe;
-        }
-    }
 }
