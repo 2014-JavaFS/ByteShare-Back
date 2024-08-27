@@ -15,8 +15,9 @@ public class RecipeService {
     private UserService userService;
 
     @Autowired
-    public RecipeService(RecipeRepository recipeRepository) {
+    public RecipeService(RecipeRepository recipeRepository, UserService userService) {
         this.recipeRepository = recipeRepository;
+        this.userService = userService;
     }
 
     public List<Recipe> findAll() {
