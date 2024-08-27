@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/recipes")
+@CrossOrigin
 public class RecipeController {
     // Declare services required here
     private final RecipeService recipeService;
