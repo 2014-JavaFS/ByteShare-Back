@@ -1,5 +1,6 @@
 package com.revature.byteshare.recipe;
 
+import com.revature.byteshare.ingredient.models.Ingredient;
 import com.revature.byteshare.user.User;
 
 import jakarta.persistence.*;
@@ -8,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,6 +21,15 @@ public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int recipeId;
+
+    @Column(name = "name", columnDefinition = "VARCHAR(100)")
+    private String name;
+
+    @OneToMany(mappedBy = "recipe")
+    private List<Ingredient> ingredients;
+
+    @Column(name = "instructions", columnDefinition = "VARCHAR(5000)")
+    private String instructions;
 
     @ManyToOne
     @JoinColumn(name = "author")
