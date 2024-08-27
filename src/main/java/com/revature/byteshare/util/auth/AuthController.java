@@ -19,7 +19,7 @@ import javax.naming.AuthenticationException;
  * <p>This controller maps all requests to <em>"/auth"</em>.
  * It uses AuthService to perform authentication logic.</p>
  */
-@CrossOrigin()
+@CrossOrigin
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
