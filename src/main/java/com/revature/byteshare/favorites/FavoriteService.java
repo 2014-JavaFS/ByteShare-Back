@@ -1,5 +1,6 @@
 package com.revature.byteshare.favorites;
 
+import com.revature.byteshare.favorites.dto.FavoriteResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,22 +33,24 @@ public class FavoriteService {
     }
     //For getting Git Commit To Actually Post to GitHub For Merge
 
-    public List<Favorite> findAllWithID(int userID){
+    public List<FavoriteResponseDTO> findAllWithID(int userID){
 
-        List<Favorite> temp =findAll();
-        List<Favorite> buisnessLogicList = new ArrayList<>();
-        for(int i=0; i<temp.size();i++){
-            if(temp.get(i).getAccountAssociatedID().getUserId() == userID) {
-                buisnessLogicList.add(temp.get(i));
-            }
+
+        List<Favorite> buisnessLogicList=favoriteRepository.findAllByUserUserId(userID);
+        List<FavoriteResponseDTO> returnList = new ArrayList<>();
+        for(int i=0;i<buisnessLogicList.size();i++){
+            FavoriteResponseDTO tempDTO = new FavoriteResponseDTO(
+                    buisnessLogicList.get(i).getUser(),
+                    buisnessLogicList.get(i).getRecipeToSave()
+                    );
+            returnList.add(tempDTO);
         }
-        //buisnessLogicList=favoriteRepository.findByUserID(userID);
-        return buisnessLogicList;
+        return returnList;
     }
 
     public boolean removeFavorite(int userID, int recipeID){
 
-        List<Favorite> temp =favoriteRepository.findAll();
+        List<Favorite> temp =favoriteRepository.findAllByUserUserId(userID);
         for(int i=0; i<temp.size();i++){
             if(temp.get(i).getRecipeToSave().getRecipeId() == recipeID) {
                 favoriteRepository.delete(temp.get(i));

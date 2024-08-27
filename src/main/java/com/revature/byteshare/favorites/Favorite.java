@@ -22,15 +22,15 @@ public class Favorite {
     //TODO Check That These names and References are Correct
     @ManyToOne
     @JoinColumn(name = "accountAssociatedID", referencedColumnName = "userId", nullable = false)
-    private User accountAssociatedID;
+    private User user;
     //TODO Check That These names and References are Correct
     @ManyToOne
     @JoinColumn(name = "recipeToSave", referencedColumnName = "recipeId", nullable = false)
     private Recipe recipeToSave;
 
 
-    public Favorite(User accountAssociatedID, Recipe recipeToSave){
+    public Favorite(User user, Recipe recipeToSave){
         this.recipeToSave=recipeToSave;
-        this.accountAssociatedID=accountAssociatedID;
+        this.user = user;
     }
 }

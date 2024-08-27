@@ -42,7 +42,7 @@ public class FavoriteRepositoryTesting {
         List<Favorite> getting = repository.findAll();
         toCheck=null;
         for(int i=0;i<getting.size();i++){
-            if(getting.get(i).getAccountAssociatedID().getUserId()==2 && getting.get(i).getRecipeToSave().getRecipeId()==3)
+            if(getting.get(i).getUser().getUserId()==2 && getting.get(i).getRecipeToSave().getRecipeId()==3)
                 toCheck=getting.get(i);
         }
         assertNotNull(toCheck);
@@ -51,6 +51,7 @@ public class FavoriteRepositoryTesting {
 
     @Test
     public void testDeleting(){
+        //TODO: REWORK FOR Custom Query?
 
         User tempUser = new User("Jacob@TestFavs.com","PasswordTest",
                 "Testman","McTestserman","TestUserName",

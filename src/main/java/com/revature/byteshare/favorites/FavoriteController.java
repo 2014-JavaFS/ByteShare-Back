@@ -1,6 +1,7 @@
 package com.revature.byteshare.favorites;
 
 
+import com.revature.byteshare.favorites.dto.FavoriteResponseDTO;
 import com.revature.byteshare.recipe.RecipeService;
 import com.revature.byteshare.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class FavoriteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Favorite>> getUsersFavorites(@RequestHeader int userID){
+    public ResponseEntity<List<FavoriteResponseDTO>> getUsersFavorites(@RequestHeader int userID){
 
         if(userID <=0 ){
             return ResponseEntity.status(400).body(null);
