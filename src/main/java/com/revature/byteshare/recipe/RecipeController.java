@@ -34,7 +34,7 @@ public class RecipeController {
         return ResponseEntity.ok(recipeService.findAllById(userId));
     }
     @PostMapping
-    public ResponseEntity<Recipe> postRecipe(@RequestBody Recipe recipe){
-        return ResponseEntity.status(201).body(recipeService.create(recipe));
+    public ResponseEntity<Recipe> postRecipe(@RequestBody RecipeDto recipeDto){
+        return ResponseEntity.status(201).body(recipeService.create(recipeDto));
     }
 }
