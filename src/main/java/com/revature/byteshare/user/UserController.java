@@ -66,9 +66,9 @@ public class UserController {
 
     @GetMapping
     private ResponseEntity<List<User>> getAllUsers(@RequestHeader String userType) {
-        if (!userType.equals("ADMIN")) {
-            throw new UnauthorizedException("You do not have the required permissions to complete this action.");
-        }
+//        if (!userType.equals("ADMIN")) {
+//            throw new UnauthorizedException("You do not have the required permissions to complete this action.");
+//        }
 
         return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());
     }
