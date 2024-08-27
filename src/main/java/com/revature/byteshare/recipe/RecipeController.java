@@ -12,10 +12,12 @@ import java.util.List;
 public class RecipeController {
     // Declare services required here
     private final RecipeService recipeService;
+
     @Autowired
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
+
     @GetMapping
     public @ResponseBody List<Recipe> getAllRecipes(){
         return recipeService.findAll();
@@ -24,6 +26,22 @@ public class RecipeController {
     public ResponseEntity<Recipe> getRecipeById(@PathVariable int id){
         return ResponseEntity.ok(recipeService.findById(id));
     }
+
+    @GetMapping("/title/{title}")
+    public ResponseEntity<Recipe> getRecipeByTitle(@PathVariable String title){
+        return ResponseEntity.ok(recipeService.findByTitle(title));
+    }
+
+    @GetMapping("/author/{authorId}")
+    public ResponseEntity<Recipe> getRecipeByAuthorId(@PathVariable int authorId){
+        return ResponseEntity.ok(recipeService.findByAuthorId(authorId));
+    }
+
+    @GetMapping("/author/{author}")
+    public ResponseEntity<Recipe> getRecipeByAuthor(@PathVariable String author){
+        return ResponseEntity.ok(recipeService.findByAuthor(author));
+    }
+
     @PutMapping
     public ResponseEntity<Boolean> putUpdateRecipe(@Valid @RequestBody Recipe updatedRecipe) {
         return ResponseEntity.ok(recipeService.update(updatedRecipe));

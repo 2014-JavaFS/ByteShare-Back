@@ -8,5 +8,11 @@ import java.util.List;
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     List<Recipe> findAllByAuthorUserId(int userId);
+
+    Recipe findByTitle(String title);
+
+    Recipe findByAuthorUserId(int authorId);
+
+    Recipe findByAuthor(String author);
 }
 

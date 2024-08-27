@@ -60,4 +60,31 @@ public class RecipeService {
             return recipes;
         }
     }
+
+    public Recipe findByTitle(String title) {
+        Recipe recipe = recipeRepository.findByTitle(title);
+        if (recipe == null){
+            throw new DataNotFoundException("No recipe with the title of " + title);
+        } else {
+            return recipe;
+        }
+    }
+
+    public Recipe findByAuthorId(int authorId) {
+        Recipe recipe = recipeRepository.findByAuthorUserId(authorId);
+        if (recipe == null){
+            throw new DataNotFoundException("No recipe with the authorId of " + authorId);
+        } else {
+            return recipe;
+        }
+    }
+
+    public Recipe findByAuthor(String author) {
+        Recipe recipe = recipeRepository.findByAuthor(author);
+        if (recipe == null){
+            throw new DataNotFoundException("No recipe with the author of " + author);
+        } else {
+            return recipe;
+        }
+    }
 }
