@@ -5,10 +5,9 @@ spring:
     password: ${DBPASS}
     driver-class-name: org.postgresql.Driver
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        ddl-auto: create
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: update
     show-sql: true
 server:
   port: 9999
