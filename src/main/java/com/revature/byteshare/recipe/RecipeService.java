@@ -5,6 +5,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -26,6 +28,7 @@ public class RecipeService {
     }
 
     public Recipe create(Recipe recipe) {
+        recipe.setDatePosted(Timestamp.from(Instant.now()));
         return recipeRepository.save(recipe);
     }
 

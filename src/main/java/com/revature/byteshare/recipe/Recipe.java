@@ -21,7 +21,7 @@ public class Recipe {
     private int recipeId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "author")
     //TODO: Get User implementation once it is available, empty file currently
     private User author;
 
