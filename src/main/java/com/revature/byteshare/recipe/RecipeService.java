@@ -7,6 +7,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -33,6 +35,7 @@ public class RecipeService {
         User author = userService.findById(recipeDto.getAuthor());
         Recipe recipe = new Recipe();
         recipe.setAuthor(author);
+        recipe.setDate(Timestamp.from(Instant.now()));
         recipe.setTitle(recipeDto.getTitle());
         recipe.setContent(recipeDto.getContent());
         recipe.setCookTime(recipeDto.getCookTime());

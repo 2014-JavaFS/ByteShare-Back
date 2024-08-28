@@ -1,6 +1,7 @@
 //package com.revature.byteshare.recipe;
 //
 //import com.revature.byteshare.user.User;
+//import com.revature.byteshare.user.UserService;
 //import org.junit.jupiter.api.Test;
 //import org.junit.jupiter.api.extension.ExtendWith;
 //import org.mockito.InjectMocks;
@@ -8,6 +9,8 @@
 //import org.mockito.junit.jupiter.MockitoExtension;
 //
 //import java.sql.Time;
+//import java.sql.Timestamp;
+//import java.time.Instant;
 //import java.time.LocalTime;
 //import java.util.List;
 //
@@ -19,6 +22,9 @@
 //    @Mock
 //    private RecipeRepository mockRecipeRepository;
 //
+//    @Mock
+//    private UserService mockUserService;
+//
 //    @InjectMocks
 //    private RecipeService sut;
 //
@@ -26,8 +32,10 @@
 //    private static User defaultUser = new User(1, "ruben@mail.com", "pasword123!", "ruben", "Ruben", "Fitch", User.UserType.AUTHOR);
 //    private static String userJSON = "{\"id\":1,\"email\":\"ruben@mail.com\",\"password\":\"pasword123!\",\"username\":\"ruben\",\"first_name\":\"Ruben\",\"last_name\":\"Fitch\",\"user_type\":\"AUTHOR\"}";
 //
-//    private static Recipe defaultRecipe = new Recipe(1, defaultUser, now, "This is a recipe", 10, 20);
+//    private static Recipe defaultRecipe = new Recipe(0, defaultUser, Timestamp.valueOf(), "Dish", "This is a recipe", 10, 20);
 //    private static String recipeJSON = "{\"id\":1,\"author\":" + userJSON + ",\"date\":\"" + now + "\",\"content\":\"This is a recipe\",\"prepTime\":10,\"cookTime\":20}";
+//
+//    private static RecipeDto defaultRecipeDto = new RecipeDto(1, "Dish", "This is a recipe", 10, 20);
 //
 //    @Test
 //    public void testFindAll(){
@@ -42,8 +50,9 @@
 //    @Test
 //    public void testCreate(){
 //        when(mockRecipeRepository.save(defaultRecipe)).thenReturn(defaultRecipe);
+//        when(mockUserService.findById(defaultRecipeDto.getAuthor())).thenReturn(defaultUser);
 //
-//        Recipe actual = sut.create(defaultRecipe);
+//        Recipe actual = sut.create(defaultRecipeDto);
 //        assertEquals(defaultRecipe, actual);
 //    }
 //
@@ -58,6 +67,8 @@
 //    @Test
 //    public void testUpdate() {
 //        when(mockRecipeRepository.save(defaultRecipe)).thenReturn(defaultRecipe);
+//
+//        when(mockUserService.findById(defaultRecipeDto.getAuthor())).thenReturn(defaultUser);
 //
 //        boolean actual = sut.update(defaultRecipe);
 //        assertEquals(true, actual);
