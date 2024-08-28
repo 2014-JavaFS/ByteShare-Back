@@ -43,9 +43,17 @@ public class FavoriteController {
     @GetMapping
     public ResponseEntity<List<FavoriteResponseDTO>> getUsersFavorites(@RequestHeader int userID){
 
+        //Checking that the user given is a valid userID
         if(userID <=0 ){
             return ResponseEntity.status(400).body(null);
         }
+
+        //Checking For If the User has any Favorites
+        List<FavoriteResponseDTO> toReturn = favoriteService.findAllWithID(userID);
+        if(toReturn.isEmpty()){
+             return ResponseEntity.status(406).body(null);
+        }
+
 
         return ResponseEntity.status(200).body(favoriteService.findAllWithID(userID));
     }
@@ -79,7 +87,7 @@ public class FavoriteController {
             //TEMP to Hold Message
             System.out.println("User doesn't have that recipe favorited");
             //Testing return
-            return ResponseEntity.status(200).body("Failed to remove from Favorites");
+            return ResponseEntity.status(404).body("Failed to remove from Favorites");
         }
     }
 
