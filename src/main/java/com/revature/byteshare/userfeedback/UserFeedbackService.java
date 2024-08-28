@@ -32,7 +32,7 @@ public class UserFeedbackService {
     }
 
     public List<UserFeedback> findAllByPostId(int recipeId){
-        return userFeedbackRepository.findAllByRecipeId(recipeId).orElseThrow();
+        return userFeedbackRepository.findAllByRecipeRecipeId(recipeId).orElseThrow();
     }
 
     public UserFeedback createUserFeedback(int recipeId, int userId, UserFeedback userFeedback){

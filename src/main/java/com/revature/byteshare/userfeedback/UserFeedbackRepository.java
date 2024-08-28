@@ -8,5 +8,10 @@ import java.util.Optional;
 
 @Repository
 public interface UserFeedbackRepository extends JpaRepository<UserFeedback, Integer> {
-    Optional<List<UserFeedback>> findAllByRecipeId(int recipeId);
+    /**
+     * Name of class attribute followed by RecipeId from the Recipe object
+     * @param recipeId
+     * @return
+     */
+    Optional<List<UserFeedback>> findAllByRecipeRecipeId(int recipeId);
 }
