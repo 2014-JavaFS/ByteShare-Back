@@ -1,5 +1,6 @@
 package com.revature.byteshare.recipe;
 
+import com.revature.byteshare.tags.TagService;
 import com.revature.byteshare.user.User;
 import com.revature.byteshare.user.UserService;
 import com.revature.byteshare.util.exceptions.DataNotFoundException;
@@ -7,17 +8,21 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class RecipeService {
-    private RecipeRepository recipeRepository;
-    private UserService userService;
+    private final RecipeRepository recipeRepository;
+    private final UserService userService;
+    private final TagService tagService;
 
     @Autowired
-    public RecipeService(RecipeRepository recipeRepository, UserService userService) {
+    public RecipeService(RecipeRepository recipeRepository, UserService userService, TagService tagService) {
         this.recipeRepository = recipeRepository;
         this.userService = userService;
+        this.tagService = tagService;
     }
 
     public List<Recipe> findAll() {
@@ -64,6 +69,22 @@ public class RecipeService {
         List<Recipe> recipes = recipeRepository.findAllByAuthorUserId(userId);
         if (recipes.isEmpty()){
             throw new DataNotFoundException("No recipes with that userId was found");
+        } else {
+            return recipes;
+        }
+    }
+
+    public List<Recipe> searchFor(String query){
+        List<Recipe> recipes = recipeRepository.searchFor(query);
+        List<Recipe> recipesByTag = new ArrayList<>();
+        try {
+            recipesByTag = tagService.findAllRecipesByTagName(query);
+            recipes.addAll(recipesByTag);
+        } catch(DataNotFoundException e){
+            //No recipes were found with query as their tag so nothing needs to be done here
+        }
+        if (recipes.isEmpty()){
+            throw new DataNotFoundException("No recipes were found with query " + query);
         } else {
             return recipes;
         }
