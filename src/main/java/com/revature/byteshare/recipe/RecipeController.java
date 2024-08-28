@@ -18,7 +18,6 @@ public class RecipeController {
     private final RecipeService recipeService;
     private final RecipeIngredientService recipeIngredientService;
 
-    private final RecipeIngredientService recipeIngredientService;
     @Autowired
     public RecipeController(RecipeService recipeService, RecipeIngredientService recipeIngredientService) {
         this.recipeService = recipeService;
@@ -56,23 +55,6 @@ public class RecipeController {
                 .recipeId(id)
                 .author(recipe.getAuthor())
                 .title(recipe.getTitle())
-                .content(recipe.getContent())
-                .cookTime(recipe.getCookTime())
-                .date(recipe.getDate())
-                .prepTime(recipe.getPrepTime())
-                .recipeIngredients(recipeIngredients)
-                .build();
-        return ResponseEntity.ok(recipeAndIngredientList);
-
-    }
-
-    @GetMapping("/ingredientlist/{id}")
-    public ResponseEntity<RecipeAndIngredientList> getRecipeWithIngredientList(@PathVariable int id){
-        Recipe recipe = recipeService.findById(id);
-        List<RecipeIngredient>recipeIngredients = recipeIngredientService.findAllIngredientsByRecipeId(id);
-        RecipeAndIngredientList recipeAndIngredientList = RecipeAndIngredientList.builder()
-                .recipeId(id)
-                .author(recipe.getAuthor())
                 .content(recipe.getContent())
                 .cookTime(recipe.getCookTime())
                 .date(recipe.getDate())
