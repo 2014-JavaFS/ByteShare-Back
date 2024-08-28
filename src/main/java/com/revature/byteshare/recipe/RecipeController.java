@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/recipes")
+@CrossOrigin
 public class RecipeController {
     // Declare services required here
     private final RecipeService recipeService;
@@ -31,5 +32,9 @@ public class RecipeController {
     @GetMapping("/{userId}")
     public ResponseEntity<List<Recipe>> getAllOrdersByUserId(@PathVariable int userId){
         return ResponseEntity.ok(recipeService.findAllById(userId));
+    }
+    @PostMapping
+    public ResponseEntity<Recipe> postRecipe(@RequestBody RecipeDto recipeDto){
+        return ResponseEntity.status(201).body(recipeService.create(recipeDto));
     }
 }
