@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.security.sasl.AuthenticationException;
 import java.util.List;
 
-@CrossOrigin
+
 @RestController
 @RequestMapping("/users")
 @CrossOrigin
