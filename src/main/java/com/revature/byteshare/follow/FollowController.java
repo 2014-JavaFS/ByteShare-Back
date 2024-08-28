@@ -11,6 +11,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/follow")
+@CrossOrigin
 public class FollowController {
     private final FollowService followService;
     private final UserService userService;
