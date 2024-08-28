@@ -1,7 +1,7 @@
 package com.revature.byteshare.userfeedback;
 
-import com.revature.byteshare.recipe.Recipe;
 import com.revature.byteshare.user.User;
+import com.revature.byteshare.recipe.Recipe;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,11 +24,11 @@ public class UserFeedback {
 
     @ManyToOne(targetEntity= Recipe.class, cascade = CascadeType.REMOVE, optional = false)
     @JoinColumn(name="recipe_id")
-    private int recipeId;
+    private Recipe recipe;
 
     @ManyToOne(targetEntity = User.class, cascade = CascadeType.REMOVE, optional = false)
     @JoinColumn(name="user_id")
-    private int authorId;
+    private User user;
 
     @Range(min = 0, max=5)
     private int rating;
@@ -44,15 +44,15 @@ public class UserFeedback {
     @Column(length=5000)
     private String commentText;
 
-    @Override
-    public String toString(){
-        return "User " + this.authorId + " gave recipe " + this.rating + " stars out of 5 and said: " + this.commentText;
-    }
-
-    public UserFeedback(int authorId, String commentText){
-        this.authorId = authorId;
+    public UserFeedback(User user, Recipe recipe, String commentText){
+        this.user = user;
+        this.recipe = recipe;
         this.commentText = commentText;
         this.datePosted = new Date();
         this.dateUpdated = new Date();
     }
+
+    public int getRating() { return this.rating;}
+
+    public String getCommentText() { return this.commentText;}
 }
