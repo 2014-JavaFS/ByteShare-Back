@@ -1,7 +1,6 @@
 package com.revature.byteshare.userfeedback;
 
 import com.revature.byteshare.user.User;
-import com.revature.byteshare.userfeedback.UserFeedback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,11 +24,11 @@ public class UserFeedbackService {
         return userFeedbackRepository.findAllById(Collections.singleton(userId));
     }
 
-    public List<UserFeedback> findAllByPostId(int postId){
-        return userFeedbackRepository.findAllByRecipeId(postId).orElseThrow();
+    public List<UserFeedback> findAllByPostId(int recipeId){
+        return userFeedbackRepository.findAllByRecipeId(recipeId).orElseThrow();
     }
 
-    public UserFeedback createUserFeedback(int postId, int userId, UserFeedback userFeedback) {
-        return userFeedbackRepository.save(userId, postId, userFeedback).orElseThrow();
+    public UserFeedback createUserFeedback(int recipeId, int userId, UserFeedback userFeedback){
+        return userFeedbackRepository.save(userId, recipeId, userFeedback.getRating(), userFeedback.getCommentText()).orElseThrow();
     }
 }

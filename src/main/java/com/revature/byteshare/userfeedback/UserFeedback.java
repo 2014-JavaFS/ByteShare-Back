@@ -51,4 +51,8 @@ public class UserFeedback {
         this.datePosted = new Date();
         this.dateUpdated = new Date();
     }
+
+    public int getRating() { return this.rating;}
+
+    public String getCommentText() { return this.commentText;}
 }

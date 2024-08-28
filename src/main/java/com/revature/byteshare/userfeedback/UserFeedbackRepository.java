@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface UserFeedbackRepository extends JpaRepository<UserFeedback, Integer> {
-    Optional<List<UserFeedback>> findAllByRecipeId(int postId);
-    Optional<UserFeedback> save(int userId, int postId, UserFeedback userFeedback);
+    Optional<List<UserFeedback>> findAllByRecipeId(int recipeId);
+    Optional<UserFeedback> save(int userId, int recipeId, int rating, String commentText);
 }
