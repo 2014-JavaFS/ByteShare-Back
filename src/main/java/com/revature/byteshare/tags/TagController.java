@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173/")
+@CrossOrigin
 @RestController
 @RequestMapping("/tags")
 public class TagController {
@@ -34,7 +34,6 @@ public class TagController {
         for(TagDTO dto : tagDTOs){
             result.add(createTag(dto));
         }
-
         return  result;
     }
 
