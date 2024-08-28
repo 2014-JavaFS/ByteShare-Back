@@ -1,6 +1,7 @@
 package com.revature.byteshare.recipe_ingredient.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.revature.byteshare.recipe.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ public class RecipeIngredient {
     private String ingredientName;
 
     @ManyToOne
+    @JsonBackReference
     private Recipe recipe;
     private double quantity;
     private String unit;

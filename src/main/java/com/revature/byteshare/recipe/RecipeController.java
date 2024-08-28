@@ -1,8 +1,8 @@
 package com.revature.byteshare.recipe;
 
-import com.revature.byteshare.recipe.dto.RecipeAndIngredientList;
 import com.revature.byteshare.recipe_ingredient.RecipeIngredientService;
 import com.revature.byteshare.recipe_ingredient.models.RecipeIngredient;
+import com.revature.byteshare.recipe_ingredient.models.RecipeAndIngredientList;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +17,7 @@ public class RecipeController {
     // Declare services required here
     private final RecipeService recipeService;
     private final RecipeIngredientService recipeIngredientService;
+
     @Autowired
     public RecipeController(RecipeService recipeService, RecipeIngredientService recipeIngredientService) {
         this.recipeService = recipeService;
@@ -63,4 +64,5 @@ public class RecipeController {
         return ResponseEntity.ok(recipeAndIngredientList);
 
     }
+
 }
