@@ -1,6 +1,9 @@
 package com.revature.byteshare.favorites;
 
 
+import com.revature.byteshare.favorites.dto.FavoriteResponseDTO;
+import com.revature.byteshare.recipe.RecipeService;
+import com.revature.byteshare.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,26 +18,30 @@ public class FavoriteController {
 
     //declarations
     private final FavoriteService favoriteService;
+    private final UserService userService;
+    private final RecipeService recipeService;
 
     @Autowired
-    FavoriteController(FavoriteService favoriteService){
+    FavoriteController(FavoriteService favoriteService, UserService userService, RecipeService recipeService){
+        this.userService=userService;
         this.favoriteService=favoriteService;
+        this.recipeService=recipeService;
     }
 
     @PostMapping
     public ResponseEntity<Favorite> postAddToFavorites(@RequestHeader("userID") int userID,
-                                             @RequestHeader("recipeID") int recipeID){
+                                                       @RequestHeader("recipeID") int recipeID){
         if(userID <=0 || recipeID <=0){
             return ResponseEntity.status(400).body(null);
         }
 
-        Favorite makingFavorite = new Favorite(userID, recipeID);
+        Favorite makingFavorite = new Favorite(userService.findById(userID), recipeService.findById(recipeID));
 
         return ResponseEntity.status(201).body(favoriteService.create(makingFavorite));
     }
 
     @GetMapping
-    public ResponseEntity<List<Favorite>> getUsersFavorites(@RequestHeader int userID){
+    public ResponseEntity<List<FavoriteResponseDTO>> getUsersFavorites(@RequestHeader int userID){
 
         if(userID <=0 ){
             return ResponseEntity.status(400).body(null);
@@ -45,7 +52,7 @@ public class FavoriteController {
 
     @DeleteMapping
     public ResponseEntity<String> deleteFromFavorites(@RequestHeader("recipeID") int recipeID,
-                                    @RequestHeader("userID") int userID){
+                                                      @RequestHeader("userID") int userID){
 
         if(userID <=0 || recipeID <=0){
             return ResponseEntity.status(400).body(null);
