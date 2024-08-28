@@ -30,6 +30,12 @@ public class RecipeController {
     public ResponseEntity<Recipe> getRecipeById(@PathVariable int id){
         return ResponseEntity.ok(recipeService.findById(id));
     }
+
+    @GetMapping("/title/{title}")
+    public ResponseEntity<Recipe> getRecipeByTitle(@PathVariable String title){
+        return ResponseEntity.ok(recipeService.findByTitle(title));
+    }
+
     @PutMapping
     public ResponseEntity<Boolean> putUpdateRecipe(@Valid @RequestBody Recipe updatedRecipe) {
         return ResponseEntity.ok(recipeService.update(updatedRecipe));
