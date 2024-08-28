@@ -35,6 +35,12 @@ public class FavoriteController {
             return ResponseEntity.status(400).body(null);
         }
 
+        List<FavoriteResponseDTO> checking = favoriteService.findAllWithID(userID);
+        for(int i=0;i<checking.size();i++){
+            if(checking.get(i).getRecipeId()==recipeID)
+                return ResponseEntity.status(406).body(null);
+        }
+
         Favorite makingFavorite = new Favorite(userService.findById(userID), recipeService.findById(recipeID));
 
         return ResponseEntity.status(201).body(favoriteService.create(makingFavorite));
