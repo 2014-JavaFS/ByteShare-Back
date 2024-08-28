@@ -27,6 +27,8 @@ public class Recipe {
     @Column(name = "timestamp", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp date;
 
+    private String title;
+
     // TODO: Spring annotations for these fields
     private String content; //either blob or text in SQL
     private int prepTime; // in minutes

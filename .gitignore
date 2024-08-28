@@ -35,3 +35,6 @@ bin/
 
 target/
 *log
+
+/src/main/resources/application.properties
+

@@ -1,4 +1,6 @@
 package com.revature.byteshare.favorites;
+import com.revature.byteshare.user.User;
+import com.revature.byteshare.recipe.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,14 +19,18 @@ public class Favorite {
     @SequenceGenerator(name = "NumberGenForFavorites", initialValue=1)
     @GeneratedValue(generator = "NumberGenForFavorites")
     private int favoriteSerialID;
-    //TODO Insert Annotations here
-    private int accountAssociatedID;
-    //TODO Insert Annotations here
-    private int recipeToSave;
+    //TODO Check That These names and References are Correct
+    @ManyToOne
+    @JoinColumn(name = "accountAssociatedID", referencedColumnName = "userId", nullable = false)
+    private User user;
+    //TODO Check That These names and References are Correct
+    @ManyToOne
+    @JoinColumn(name = "recipeToSave", referencedColumnName = "recipeId", nullable = false)
+    private Recipe recipeToSave;
 
 
-    public Favorite(int accountAssociatedID, int recipeToSave){
+    public Favorite(User user, Recipe recipeToSave){
         this.recipeToSave=recipeToSave;
-        this.accountAssociatedID=accountAssociatedID;
+        this.user = user;
     }
 }
