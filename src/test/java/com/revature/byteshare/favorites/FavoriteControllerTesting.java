@@ -40,7 +40,7 @@ public class FavoriteControllerTesting {
 
     @Test
     public void testAddingToFavorites() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.post("/Favorite")
+        mockMvc.perform(MockMvcRequestBuilders.post("/favorite")
                 .header("userID", 1)
                 .header("recipeID",1)
 
@@ -50,7 +50,7 @@ public class FavoriteControllerTesting {
     @Test
     public void testRemovingFromFavorites()throws Exception{
         //TEST-1 User Shouldn't have that Recipie Favorited
-        mockMvc.perform(MockMvcRequestBuilders.delete("/Favorite")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/favorite")
                 .header("userID", 1)
                 .header("recipeID",1)
         ).andExpect(MockMvcResultMatchers.status().is(200));
@@ -59,7 +59,7 @@ public class FavoriteControllerTesting {
 
     @Test
     public void testGetUsersFavorites()throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.get("/Favorite")
+        mockMvc.perform(MockMvcRequestBuilders.get("/favorite")
                 .header("userID", 1)
         ).andExpect(MockMvcResultMatchers.status().is(200));
 
