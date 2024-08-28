@@ -21,7 +21,7 @@ public class FavoriteResponseDTO {
             this.userId=user.getUserId();
             this.recipeId=recipe.getRecipeId();
             this.author=recipe.getAuthor().getUsername();
-            this.name=user.getUsername();
+            this.name=recipe.getTitle();
             this.content=recipe.getContent();
             this.datePosted=recipe.getDate();
     }
