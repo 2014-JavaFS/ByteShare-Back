@@ -44,9 +44,10 @@ public class UserFeedback {
     @Column(length=5000)
     private String commentText;
 
-    public UserFeedback(User user, Recipe recipe, String commentText){
+    public UserFeedback(User user, Recipe recipe, int rating, String commentText){
         this.user = user;
         this.recipe = recipe;
+        this.rating = rating;
         this.commentText = commentText;
         this.datePosted = new Date();
         this.dateUpdated = new Date();
