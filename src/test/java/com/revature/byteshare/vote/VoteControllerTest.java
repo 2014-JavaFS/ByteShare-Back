@@ -1,4 +1,4 @@
-package com.revature.byteshare.Vote;
+package com.revature.byteshare.vote;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package com.revature.byteshare.Vote;
+package com.revature.byteshare.vote;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;

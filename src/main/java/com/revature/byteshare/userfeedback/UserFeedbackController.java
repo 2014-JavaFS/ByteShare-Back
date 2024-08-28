@@ -1,6 +1,6 @@
 package com.revature.byteshare.userfeedback;
 
-import com.revature.byteshare.User.User;
+import com.revature.byteshare.user.User;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,7 +45,10 @@ public class UserFeedbackController {
                                                            @RequestBody UserFeedback userFeedback){
         UserFeedback postedFeedback = userFeedbackService.createUserFeedback(postId, userId, userFeedback);
         if(postedFeedback != null) return ResponseEntity.status(HttpStatus.OK).body(postedFeedback);
-        else return 
-        return ResponseEntity.status(HttpStatus.OK).body(
+        else return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new UserFeedback(new User(), null, "Failed to post feedback")
+        );
     }
+
+
 }

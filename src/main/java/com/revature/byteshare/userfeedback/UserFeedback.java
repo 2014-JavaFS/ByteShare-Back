@@ -1,7 +1,7 @@
 package com.revature.byteshare.userfeedback;
 
 import com.revature.byteshare.user.User;
-import com.revature.byteshare.Recipe.Recipe;
+import com.revature.byteshare.recipe.Recipe;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,8 +44,9 @@ public class UserFeedback {
     @Column(length=5000)
     private String commentText;
 
-    public UserFeedback(User user, String commentText){
+    public UserFeedback(User user, Recipe recipe, String commentText){
         this.user = user;
+        this.recipe = recipe;
         this.commentText = commentText;
         this.datePosted = new Date();
         this.dateUpdated = new Date();

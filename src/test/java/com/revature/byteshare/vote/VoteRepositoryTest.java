@@ -1,4 +1,4 @@
-package com.revature.byteshare.Vote;
+package com.revature.byteshare.vote;
 
 public class VoteRepositoryTest {
 }

@@ -1,4 +1,4 @@
-package com.revature.byteshare.Vote;
+package com.revature.byteshare.vote;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

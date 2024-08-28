@@ -1,4 +1,4 @@
-package com.revature.byteshare.Vote;
+package com.revature.byteshare.vote;
 
 import com.revature.byteshare.util.exceptions.DataNotFoundException;
 import com.revature.byteshare.util.exceptions.InvalidInputException;

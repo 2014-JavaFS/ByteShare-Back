@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface UserFeedbackRepository extends JpaRepository<UserFeedback, Integer> {
     Optional<List<UserFeedback>> findAllByRecipeId(int postId);
+    Optional<UserFeedback> save(int userId, int postId, UserFeedback userFeedback);
 }

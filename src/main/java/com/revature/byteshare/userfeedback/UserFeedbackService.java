@@ -1,6 +1,7 @@
 package com.revature.byteshare.userfeedback;
 
-import com.revature.byteshare.User.User;
+import com.revature.byteshare.user.User;
+import com.revature.byteshare.userfeedback.UserFeedback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class UserFeedbackService {
     public UserFeedbackService(UserFeedbackRepository userFeedbackRepository){
         this.userFeedbackRepository = userFeedbackRepository;
     }
-    //todo:Define some business logic for "findall"
+
     public List<UserFeedback> findAll(){
         return userFeedbackRepository.findAll();
     }
@@ -26,5 +27,9 @@ public class UserFeedbackService {
 
     public List<UserFeedback> findAllByPostId(int postId){
         return userFeedbackRepository.findAllByRecipeId(postId).orElseThrow();
+    }
+
+    public UserFeedback createUserFeedback(int postId, int userId, UserFeedback userFeedback) {
+        return userFeedbackRepository.save(userId, postId, userFeedback).orElseThrow();
     }
 }
