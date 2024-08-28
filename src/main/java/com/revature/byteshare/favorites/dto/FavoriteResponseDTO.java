@@ -20,10 +20,10 @@ public class FavoriteResponseDTO {
     public FavoriteResponseDTO(User user, Recipe recipe){
             this.userId=user.getUserId();
             this.recipeId=recipe.getRecipeId();
-            this.author=recipe.getUser().getUsername();
+            this.author=recipe.getAuthor().getUsername();
             this.name=user.getUsername();
             this.content=recipe.getContent();
-            this.datePosted=recipe.getDatePosted();
+            this.datePosted=recipe.getDate();
     }
 
     public int getUserId() {
