@@ -45,8 +45,16 @@ public class FollowController {
     @PostMapping
     public ResponseEntity<Follow> postFollow(@RequestHeader int currentUserId, @RequestParam int followingId) {
         Follow newFollow = new Follow();
+        List<Follow> checking= followService.findAllFollowers(currentUserId);
+        for(int i=0;i<checking.size();i++){
+            if(checking.get(i).getFollowing().getUserId()==followingId)
+                return ResponseEntity.status(406).body(null);
+        }
+
+
         newFollow.setFollower(userService.findByUserIdNumber(currentUserId));
         newFollow.setFollowing(userService.findByUserIdNumber(followingId));
+
 
         return ResponseEntity.status(HttpStatus.CREATED).body(followService.createFollow(newFollow));
     }
