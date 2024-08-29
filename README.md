@@ -16,8 +16,9 @@ ByteShare is a food social media app where Authors are able to create their reci
 - Arjun Ramsinghani (Back End Lead)
 - David Jeske (Front End Lead)
 - Ethan Vrooman (GitHub Lead)
+- Asaf Ahmed (DevOps Lead)
 - Amsal Kassam
-- Asaf Ahmed
+
 - Iskender Mederov
 - Jacob Ryan
 - Ruben Fitch
