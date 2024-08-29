@@ -1,5 +1,6 @@
 package com.revature.byteshare.recipe_ingredient;
 
+import com.revature.byteshare.recipe.Recipe;
 import com.revature.byteshare.recipe_ingredient.models.RecipeIngredient;
 import com.revature.byteshare.recipe_ingredient.models.RecipeIngredientDto;
 import com.revature.byteshare.recipe.RecipeRepository;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RecipeIngredientService {
@@ -53,4 +55,23 @@ public class RecipeIngredientService {
         repository.deleteById(id);
     }
 
+    public List<RecipeIngredient> postIngredients(List<RecipeIngredientDto> ingredientDtos) {
+
+        List<RecipeIngredient> ingredients = ingredientDtos.stream()
+                .map(dto -> {
+                    Recipe recipe = recipeRepository.findById(dto.getRecipeId())
+                            .orElseThrow(() -> new RuntimeException("Recipe not found"));
+
+                    return RecipeIngredient.builder()
+                            .ingredientName(dto.getIngredient())
+                            .recipe(recipe)
+                            .quantity(dto.getQuantity())
+                            .unit(dto.getUnit())
+                            .build();
+                })
+                .collect(Collectors.toList());
+
+        // Save Entities to Database
+        return repository.saveAll(ingredients);
+    }
 }
