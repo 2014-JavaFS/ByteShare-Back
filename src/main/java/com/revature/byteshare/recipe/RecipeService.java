@@ -74,6 +74,15 @@ public class RecipeService {
         }
     }
 
+    public Recipe findByTitle(String title) {
+        Recipe recipe = recipeRepository.findByTitle(title);
+        if (recipe == null){
+            throw new DataNotFoundException("No recipe with the title of " + title);
+        } else {
+            return recipe;
+        }
+    }
+
     public List<Recipe> searchFor(String query){
         List<Recipe> recipes = recipeRepository.searchFor(query.toLowerCase());
         List<Recipe> recipesByTag;

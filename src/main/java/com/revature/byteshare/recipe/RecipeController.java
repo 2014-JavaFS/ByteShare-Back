@@ -1,9 +1,11 @@
 package com.revature.byteshare.recipe;
 
+
 import com.revature.byteshare.ingredient.models.Macros;
 import com.revature.byteshare.recipe.dto.RecipeAndIngredientList;
 import com.revature.byteshare.recipe_ingredient.RecipeIngredientService;
 import com.revature.byteshare.recipe_ingredient.models.RecipeIngredient;
+import com.revature.byteshare.recipe_ingredient.models.RecipeAndIngredientList;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ public class RecipeController {
     // Declare services required here
     private final RecipeService recipeService;
     private final RecipeIngredientService recipeIngredientService;
+
     @Autowired
     public RecipeController(RecipeService recipeService, RecipeIngredientService recipeIngredientService) {
         this.recipeService = recipeService;
@@ -31,6 +34,12 @@ public class RecipeController {
     public ResponseEntity<Recipe> getRecipeById(@PathVariable int id){
         return ResponseEntity.ok(recipeService.findById(id));
     }
+
+    @GetMapping("/title/{title}")
+    public ResponseEntity<Recipe> getRecipeByTitle(@PathVariable String title){
+        return ResponseEntity.ok(recipeService.findByTitle(title));
+    }
+
     @PutMapping
     public ResponseEntity<Boolean> putUpdateRecipe(@Valid @RequestBody Recipe updatedRecipe) {
         return ResponseEntity.ok(recipeService.update(updatedRecipe));
@@ -64,4 +73,5 @@ public class RecipeController {
         return ResponseEntity.ok(recipeAndIngredientList);
 
     }
+
 }
