@@ -84,10 +84,10 @@ public class RecipeService {
     }
 
     public List<Recipe> searchFor(String query){
-        List<Recipe> recipes = recipeRepository.searchFor(query);
-        List<Recipe> recipesByTag = new ArrayList<>();
+        List<Recipe> recipes = recipeRepository.searchFor(query.toLowerCase());
+        List<Recipe> recipesByTag;
         try {
-            recipesByTag = tagService.findAllRecipesByTagName(query);
+            recipesByTag = tagService.findAllRecipesByTagName(query.toLowerCase());
             recipes.addAll(recipesByTag);
         } catch(DataNotFoundException e){
             //No recipes were found with query as their tag so nothing needs to be done here
