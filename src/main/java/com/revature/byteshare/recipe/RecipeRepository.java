@@ -12,7 +12,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 
     Recipe findByTitle(String title);
   
-    @Query("select r from Recipe r where lower(r.content) like %?1% or lower(r.title) like %?1% or lower(r.author.username) like %?1%")
+    @Query("select distinct r from Recipe r where lower(r.content) like %?1% or lower(r.title) like %?1% or lower(r.author.username) like %?1%")
     List<Recipe> searchFor(String query);
 }
 
